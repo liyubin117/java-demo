@@ -4,6 +4,7 @@ public class Hello{
 	static private int a=1;
 	
 	public static void main(String[] args){
+		
 		System.out.println("Hello World!");
 		
 		System.out.println("Hello"+" world!"=="Hello world!");
@@ -19,6 +20,8 @@ public class Hello{
 		final String s4=" world!";
 		System.out.println(s3+s4);
 		System.out.println(s3+s4=="Hello world!");
+		
+		System.out.println("test");
 
 	}
 	
