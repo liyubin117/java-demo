@@ -1,6 +1,7 @@
 package com.lyb;
 public class A
 {
+	
  public static int b = B.a;
  public static A plus =new A("A");
  public static final int finalInt = (int)(Math.random()*100);
