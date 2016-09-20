@@ -22,6 +22,24 @@ public class Hello{
 		System.out.println(s3+s4=="Hello world!");
 		
 		System.out.println("test");
+		
+		int a=10_9999_8888;
+		System.out.println(a);
+		
+		char b='a';
+		String c="aaa";
+		switch(c){
+		case("aaa"):{
+			System.out.println("aaa");
+			break;
+		}
+		case("aaaa"):{
+			System.out.println("aaaa");
+			break;
+		}
+		default:
+			break;
+		}
 
 		
 	}
