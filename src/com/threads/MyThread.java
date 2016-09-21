@@ -20,15 +20,19 @@ public class MyThread extends Thread{
 		
 		t1.start();
 		t2.start();
+		Thread.currentThread().setPriority(10);
+//		Thread.sleep(5000);
 		
-		t1.sleep(5000);
 		
+//		t2.join(1000);
 		
-//		Thread.currentThread().join(1);
-//		
-//		for(int i=0;i<100;i++){
-//			System.out.println(Thread.currentThread().getName()+" working..."+i);
-//		}
+		Thread.yield();
+		
+		System.out.println("-----"+t1.isAlive());
+		System.out.println("-----"+t2.isAlive());
+		for(int i=0;i<100;i++){
+			System.out.println(Thread.currentThread().getName()+" working..."+i);
+		}
 		
 
 	}
