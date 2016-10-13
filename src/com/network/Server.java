@@ -15,9 +15,13 @@ public class Server {
 			Thread.currentThread().sleep(3000);
 			Socket s=ss.accept();
 			PrintStream ps=new PrintStream(s.getOutputStream());
-			Scanner scan=new Scanner(System.in);
+			ps.println("hello from server!!!");
+			
+			//自定义输入，无效，待研究
+/*			Scanner scan=new Scanner(System.in);
 			String st=scan.nextLine();
-			ps.println(st);
+			System.out.println(st);*/
+			
 			ps.close();
 			s.close();
 		}

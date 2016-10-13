@@ -9,11 +9,13 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 public class Client {
+	private static final int TIMEOUT=1;
+	
 	public static void main(String[] args) throws IOException{
 		while(true){
 			try{
 				Socket s=new Socket(InetAddress.getLocalHost(),10888);
-				s.setSoTimeout(500000000);
+				s.setSoTimeout(TIMEOUT*1000);
 				BufferedReader br=new BufferedReader(new InputStreamReader(s.getInputStream()));
 				String line=br.readLine();
 				System.out.println("来自服务器的数据："+line);
@@ -21,7 +23,7 @@ public class Client {
 				br.close();
 				s.close();
 			}catch(SocketTimeoutException e){
-				System.out.println("超过5s，停止接收");
+				System.out.println("超过"+TIMEOUT+"s，停止接收");
 			}
 		}
 
