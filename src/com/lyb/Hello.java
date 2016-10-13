@@ -1,4 +1,7 @@
 package com.lyb;
+
+import java.util.Scanner;
+
 public class Hello{
 	
 	static private int a=1;
@@ -40,6 +43,10 @@ public class Hello{
 		default:
 			break;
 		}
+		
+		Scanner scan=new Scanner(System.in);
+		String st=scan.nextLine();
+		System.out.println(st);
 
 		
 	}
