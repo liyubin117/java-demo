@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 
 /*C/S结构聊天室简单实现客户端*/
 
+//主线程：接收System.in输入，并发送到服务器
 public class MyClient {
 	public static void main(String[] args) throws Exception{
 		Socket s=new Socket("127.0.0.1",30000);
@@ -23,6 +24,7 @@ public class MyClient {
 	}
 }
 
+//子线程：接收服务器输入、并输出到屏幕
 class ClientThread implements Runnable{
 	private Socket s;
 	BufferedReader br=null;

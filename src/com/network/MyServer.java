@@ -12,6 +12,7 @@ import java.util.List;
 
 /*C/S结构聊天室简单实现服务器*/
 
+//主线程：监听
 public class MyServer {
 	public static List<Socket> socketList=Collections.synchronizedList(new ArrayList<>());
 	
@@ -27,6 +28,7 @@ public class MyServer {
 
 }
 
+//子线程：接收客户端输入，并发送到所有客户端
 class ServerThread implements Runnable{
 	Socket s=null;
 	BufferedReader br=null;
