@@ -14,7 +14,7 @@ import java.util.List;
 
 //主线程：监听
 public class MyServer {
-	public static List<Socket> socketList=Collections.synchronizedList(new ArrayList<>());
+	public static List<Socket> socketList=Collections.synchronizedList(new ArrayList<Socket>());
 	
 	public static void main(String[] args) throws IOException{
 		ServerSocket ss=new ServerSocket(30000);
