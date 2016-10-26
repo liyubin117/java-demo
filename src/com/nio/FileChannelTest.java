@@ -22,7 +22,7 @@ public class FileChannelTest {
 			inChannel=new FileInputStream(f).getChannel();
 			MappedByteBuffer buffer=inChannel.map(FileChannel.MapMode.READ_ONLY, 0, f.length() );
 			
-			Charset charset=Charset.forName("GBK");
+			Charset charset=Charset.forName("UTF8");
 			outChannel =new FileOutputStream(f2).getChannel();
 			outChannel.write(buffer);
 			
