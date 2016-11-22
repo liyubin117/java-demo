@@ -1,6 +1,7 @@
 package com.sql;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ public class TestJDBC {
 		
 		Statement stat=conn.createStatement();
 		ResultSet rs=null;
+		DatabaseMetaData dbma=conn.getMetaData();
 
 		try{
 			//查询
@@ -56,9 +58,13 @@ public class TestJDBC {
 				System.out.println(rs.getInt(1)+"\t"+rs.getString(2));
 			}
 			
+			String[] types={"TABLE"};
+			rs=dbma.getTables(null, null, "t2", types);
+			if(rs.next()){
 			//删表
 			row=stat.executeUpdate("drop table t2");
 			System.out.println("drop successfully!");
+			}
 			
 			//建表
 			row=stat.executeUpdate("create table t2 (id int,name varchar(20),addr varchar(50))");
