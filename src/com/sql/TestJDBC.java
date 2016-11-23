@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -21,11 +22,16 @@ public class TestJDBC {
 		ResultSet rs=null;
 		DatabaseMetaData dbma=conn.getMetaData();
 
+
 		try{
 			//查询
 			rs=stat.executeQuery("select id,name,count(1) as cnt from t1 group by id,name");
+			ResultSetMetaData rsmd=rs.getMetaData();
 			while(rs.next()){
-				System.out.println(rs.getInt(1)+"\t"+rs.getString("name")+"\t"+rs.getString("cnt"));
+				for(int i=0;i<rsmd.getColumnCount();i++){
+					System.out.print(rs.getObject(i+1)+"\t");
+				}
+				System.out.println();
 			}
 			
 			//插入数据
