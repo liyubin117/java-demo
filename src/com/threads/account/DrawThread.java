@@ -24,5 +24,9 @@ public class DrawThread extends Thread{
 		Account2 b=new Account2("123891",5000);
 		new DrawThread("李",b,4000).start();
 		new DrawThread("叶",b,1001).start();
+		
+		Account3 c=new Account3("123892",8000);
+		new DrawThread("李",c,4000).start();
+		new DrawThread("叶",c,3000).start();
 	}
 }

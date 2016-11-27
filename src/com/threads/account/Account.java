@@ -28,16 +28,20 @@ public class Account {
 	public void draw(String name,double d,Account a){
 		synchronized(a){
 			if(a.getBalance()>=d){
-				System.out.println("account:"+a.getAccountName()+" "+name+"take:"+d);
+				//System.out.println("account:"+a.getAccountName()+" "+name+"take:"+d);
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 				a.minusBalance(d);
-				System.out.println("account:"+a.getAccountName()+" "+name+" rest:"+a.getBalance());
-			}else{
-				System.out.println("money is not enough to take!");
+				System.out.println("account:" + a.getAccountName() + "," + name
+						+"take:"+d+","
+						+ " rest:" + a.getBalance());
+				}else{
+				System.out.println("account:"+a.getAccountName()+",rest: "+a.getBalance()
+				+","+name+"take："+d
+				+",money is not enough to take!");			
 			}
 		}
 	}

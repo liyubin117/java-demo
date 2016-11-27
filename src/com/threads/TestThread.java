@@ -1,6 +1,6 @@
 package com.threads;
 
-public class MyThread extends Thread{
+public class TestThread extends Thread{
 	
 	private int i=0;
 	
@@ -15,10 +15,10 @@ public class MyThread extends Thread{
 	}
 
 	public static void main(String[] args) throws InterruptedException {
-		MyThread t1=new MyThread();
+		TestThread t1=new TestThread();
 		t1.setName("low");
 		
-		MyThread t2=new MyThread();
+		TestThread t2=new TestThread();
 		t2.setName("t2");
 		
 		
