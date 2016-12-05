@@ -16,8 +16,8 @@ public class FileChannelTest {
 		FileChannel inChannel=null;
 		FileChannel outChannel=null;
 		try{
-			File f=new File("D:/eclipse_luna/workspace_luna/JavaTest/file/HelloWorld.java");
-			File f2=new File("D:/eclipse_luna/workspace_luna/JavaTest/file/HelloWorld2.java");
+			File f=new File("file/HelloWorld.java");
+			File f2=new File("file/HelloWorld2.java");
 			
 			inChannel=new FileInputStream(f).getChannel();
 			MappedByteBuffer buffer=inChannel.map(FileChannel.MapMode.READ_ONLY, 0, f.length() );

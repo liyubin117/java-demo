@@ -18,7 +18,7 @@ public class FileChannelTest2 {
 		FileChannel inChannel=null;
 		String newData=null;
 		try{
-			File f=new File("C:/Software/eclipse_luna/workspace_luna/JavaTest/file/HelloWorld.java");
+			File f=new File("file/HelloWorld.java");
 			
 			inChannel=new RandomAccessFile(f,"rw").getChannel();
 //			ByteBuffer bb=ByteBuffer.allocate(1024);
