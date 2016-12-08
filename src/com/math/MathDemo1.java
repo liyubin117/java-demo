@@ -10,6 +10,8 @@ public class MathDemo1 {
 		
 		System.out.println("3的2次方："+Math.pow(3, 2));
 		System.out.println("四舍五入到整数："+Math.round(33.4));
+		System.out.println("33.4 ceil："+Math.ceil(33.4));
+		System.out.println("33.4 floor："+Math.floor(33.4));
 	}
 
 }
