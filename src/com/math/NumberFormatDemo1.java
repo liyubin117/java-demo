@@ -26,7 +26,6 @@ public class NumberFormatDemo1 {
 		try {
 			System.out.println(df.parseObject(s));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
