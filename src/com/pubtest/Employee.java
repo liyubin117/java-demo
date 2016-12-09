@@ -15,6 +15,10 @@ public class Employee
     private String name;
     private double salary;
     private Date hireDay;
+    
+    protected static String addr="protected addr";
+    
+    public Employee(){}
 
     public Employee(String n, double s, int year, int month, int day)
     {
