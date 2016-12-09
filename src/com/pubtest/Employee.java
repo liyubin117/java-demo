@@ -1,4 +1,4 @@
-package PackageTest.com.horstmann.corejava;
+package com.pubtest;
 
 // the classes in this file are part of this package
 
