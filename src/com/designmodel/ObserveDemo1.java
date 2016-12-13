@@ -12,9 +12,9 @@ class House extends Observable{
 		return this.price;
 	}
 	public void setPrice(double d){
-		super.setChanged();
-		super.notifyObservers(d);
-		this.price=price;
+		super.setChanged();  //设置变化点
+		super.notifyObservers(d); //通知观察者价格变为d
+		this.price=d;
 	}
 	public String toString(){
 		return "房子价格为："+this.price;
@@ -23,13 +23,15 @@ class House extends Observable{
 
 class HousePriceObserver implements Observer{
 	private String name;
+	private Double price;
 	public HousePriceObserver(String n){
 		this.name=n;
 	}
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof Double){
-			System.out.println(this.name+"观察到的价格更改为："+((Double)arg).doubleValue());
+			this.price=((Double)arg).doubleValue();
+			System.out.println(this.name+"观察到的价格更改为："+this.price+o);
 		}
 	}	
 }
@@ -51,6 +53,8 @@ public class ObserveDemo1 {
 		
 		h.setPrice(8000);
 		h2.setPrice(5000);
+		System.out.println(h);
+		System.out.println(h2);
 	}
 
 }
