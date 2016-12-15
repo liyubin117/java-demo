@@ -1,4 +1,4 @@
-package com.lyb;
+package com.basic;
 class CA{
 	public static CA a=new CA(20);
 	public static int j=8;

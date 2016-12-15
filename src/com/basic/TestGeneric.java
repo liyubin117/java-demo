@@ -1,4 +1,4 @@
-package com.lyb;
+package com.basic;
 
 class Pair<U,V>{
 	U first;

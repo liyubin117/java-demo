@@ -1,4 +1,4 @@
-package com.lyb;
+package com.designmodel;
 //单例模式
 class Singleton{
 	private static Singleton instance;

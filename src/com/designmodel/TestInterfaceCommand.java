@@ -1,4 +1,4 @@
-package com.lyb;
+package com.designmodel;
 
 /*用接口实现传入代码块的类似功能，体现了命令模式的设计思想*/
 interface Command{

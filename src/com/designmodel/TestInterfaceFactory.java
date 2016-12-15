@@ -1,4 +1,4 @@
-package com.lyb;
+package com.designmodel;
 //规范与实现分离，降低耦合度，可大大简化重构所需修改的工作量
 //本例体现了抽象工厂的设计模式
 

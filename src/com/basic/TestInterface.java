@@ -1,4 +1,4 @@
-package com.lyb;
+package com.basic;
 
 interface InterfaceA{
 	//接口里的域变量默认是public static final，不用显式写
