@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class FileDemo1 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		//创建目录
 		//File dir=new File("c:/test.dir");
 		File dir=new File("c:"+File.separator+"test.dir");
@@ -49,6 +49,12 @@ public class FileDemo1 {
 		
 		System.out.println("pathSeparator:"+File.pathSeparator);
 		System.out.println("separator:"+File.separator);
+		
+		File dir2=new File("c:/ha/a/b");
+		System.out.println(dir2.mkdirs());
+		//也可以传入相对路径，默认是在当前工程目录下
+		dir2=new File("a.java");
+		System.out.println(dir2.createNewFile());
 		
 	}
 

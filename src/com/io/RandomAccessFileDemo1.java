@@ -38,6 +38,7 @@ public class RandomAccessFileDemo1 {
 		}
 		System.out.println("第一个人的名字是："+new String(b));
 		System.out.println("第一个人的年龄是："+read.readInt());
+		read.close();
 		
 		
 		
