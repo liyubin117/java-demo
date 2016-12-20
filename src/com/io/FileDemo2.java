@@ -2,7 +2,7 @@ package com.io;
 
 import java.io.File;
 
-//打印目录下的所有文件
+//打印目录下的所有文件和目录，并标识出来
 public class FileDemo2 {
 
 	public static void main(String[] args) {
@@ -13,6 +13,7 @@ public class FileDemo2 {
 	public static void printR(File f){
 		if(f!=null){  //判断是否为空
 			if(f.isDirectory()){
+				System.out.println(f+"\t"+"dir");
 				File[] files=f.listFiles();
 				if(files!=null){
 					for(File a:files){
@@ -20,7 +21,7 @@ public class FileDemo2 {
 					}
 				}
 			}else{
-				System.out.println(f);
+				System.out.println(f+"\t"+"file");
 			}
 		}
 	}
