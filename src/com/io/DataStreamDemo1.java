@@ -37,6 +37,7 @@ public class DataStreamDemo1 {
 		}
 		dos.close();
 		
+		//不知道为什么有乱码
 		DataInputStream dis=new DataInputStream(new FileInputStream(f));
 		int len=0;
 		char[] temp;

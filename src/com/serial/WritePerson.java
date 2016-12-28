@@ -1,5 +1,6 @@
 package com.serial;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -14,7 +15,7 @@ public class WritePerson {
 		ObjectOutputStream oos=null;
 	
 		try{
-			oos=new ObjectOutputStream(new FileOutputStream("D:/eclipse_luna/workspace_luna/JavaTest/file/person.txt"));
+			oos=new ObjectOutputStream(new FileOutputStream("file"+File.separator+"person.txt"));
 			Person p=new Person("liyubin",25);
 			oos.writeObject(p);
 		}finally{

@@ -36,5 +36,11 @@ public class StringDemo1 {
         builder1.append("!aaaa");
         builder1.append('b');
         System.out.println(builder1);
+        
+        char[] temp=new char[200];
+        for(int i=0;i<10;i++){
+        	temp[i]='人';
+        }
+        System.out.println(new String(temp,0,10));
     }
 }

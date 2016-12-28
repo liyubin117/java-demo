@@ -1,5 +1,6 @@
 package com.serial;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -10,7 +11,7 @@ public class ReadPerson {
 		ObjectInputStream ois=null;
 		
 		try{
-			ois=new ObjectInputStream(new FileInputStream("D:/eclipse_luna/workspace_luna/JavaTest/file/person.txt"));
+			ois=new ObjectInputStream(new FileInputStream("file"+File.separator+"person.txt"));
 			Person p=(Person)ois.readObject();
 			System.out.println(p.toString());
 		} catch (ClassNotFoundException e) {
