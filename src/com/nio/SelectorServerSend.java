@@ -11,7 +11,8 @@ import java.nio.channels.SocketChannel;
 import java.util.Date;
 import java.util.Set;
 
-public class SelectorServer {
+//NIO服务端，本例只能向客户端发送信息，不能接收
+public class SelectorServerSend {
 
 	public static void main(String[] args) throws IOException {
 		Selector selector = Selector.open();
