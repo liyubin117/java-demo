@@ -41,6 +41,8 @@ public class BufferDemo1 {
 		System.out.println("position:"+buff.position());
 		System.out.println("limit:"+buff.limit());
 		System.out.println("capacity:"+buff.capacity());
+		
+		System.out.println(new String(buff.toString().getBytes()));
 	}
 
 }
