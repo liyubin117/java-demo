@@ -1,6 +1,7 @@
 package com.nio;
 
 import java.nio.Buffer;
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 
 public class BufferDemo1 {
@@ -42,7 +43,29 @@ public class BufferDemo1 {
 		System.out.println("limit:"+buff.limit());
 		System.out.println("capacity:"+buff.capacity());
 		
+		//打印buff中的内容的两种方法
+		//第一种不适用于ByteBuffer
 		System.out.println(new String(buff.toString().getBytes()));
+		buff.position(0);
+		char[] charArr=new char[buff.remaining()];
+		buff.get(charArr);
+		System.out.println(new String(charArr));
+		
+		//wrap方法的使用
+		ByteBuffer bbuf=ByteBuffer.allocate(10);
+		ByteBuffer newBbuf=ByteBuffer.allocate(10);
+		/*此时会因大于长度限制而报错
+		bbuf.put("Hello ByteBuffer,i am liyubin!!!".getBytes());*/
+		String data="Hello ByteBuffer,i am liyubin!!!";
+		newBbuf=ByteBuffer.wrap(data.getBytes());
+		/*注意此时Buffer的limit、position仍是0，不可用flip()
+		newBbuf.flip();*/
+		byte[] bytes=new byte[newBbuf.remaining()];
+		newBbuf.get(bytes);
+		System.out.println(new String(bytes));
+		System.out.println(new String(newBbuf.toString().getBytes()));
+		System.out.println(data);
+		
 	}
 
 }
