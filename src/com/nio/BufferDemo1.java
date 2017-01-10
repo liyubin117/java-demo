@@ -45,7 +45,7 @@ public class BufferDemo1 {
 		
 		//打印buff中的内容的两种方法
 		//第一种不适用于ByteBuffer
-		System.out.println(new String(buff.toString().getBytes()));
+		System.out.println(buff);
 		buff.position(0);
 		char[] charArr=new char[buff.remaining()];
 		buff.get(charArr);
