@@ -1,4 +1,4 @@
-package com.basic;
+package com.generic;
 
 class Pair<U,V>{
 	U first;
