@@ -1,6 +1,7 @@
 package com.pubtest;
 
 public class Person implements Cloneable{
+	
 	private String name;
 	private String addr;
 	private int age;
@@ -23,5 +24,23 @@ public class Person implements Cloneable{
 	public Object clone() throws CloneNotSupportedException{
 		//return super.clone();
 		return new Person(this.name,this.addr,this.age);
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

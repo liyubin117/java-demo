@@ -9,6 +9,8 @@ public class SystemDemo {
 		System.out.println("当前字符集："+System.getProperty("file.encoding")
 		+"\n当前目录："+System.getProperty("user.dir")
 		);
+		
+		System.out.print("换行符："+System.getProperty("line.separator"));
 	}
 
 }

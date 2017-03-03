@@ -37,6 +37,7 @@ public class LoadDemo1 {
 		while(eml.hasMoreElements()){
 			System.out.println("系统类加载器的加载路径："+eml.nextElement());
 		}
+		System.out.println("系统类加载器的加载路径："+System.getProperty("java.class.path"));
 
 	}
 
