@@ -17,6 +17,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_102/lib/missioncontrol/plugins/javax.servlet_3.0.0.v201112011016.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
