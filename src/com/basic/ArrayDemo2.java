@@ -23,7 +23,7 @@ public class ArrayDemo2 {
         //copy
         System.out.println();
         int[] s3 = {1,2,3,4,5};
-        int[] d = {11,22,33,44,55};
+        int[] d = {11,22,33,44,55,66};
         ArrayCopy.copy(s3, 2, d, 3, 3);
         print(d);
         //OR

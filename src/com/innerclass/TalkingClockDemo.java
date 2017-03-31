@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by Administrator on 2015-12-15.
  */
-public class InnerClassTest {
+public class TalkingClockDemo {
     public static void main(String [] args){
         TalkingClock clock = new TalkingClock(1000,true);
         clock.start();
