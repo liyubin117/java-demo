@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Created by Administrator on 2015-9-17.
  * 输入、输出
  */
-public class FileInOut {
+public class ScannerDemo {
     public static void main(String args[]) throws IOException {
     /*    Scanner scanner1 = new Scanner(System.in);
         //输入含空格的字符串
@@ -44,17 +44,24 @@ public class FileInOut {
         }
 
         //输入、输出文件
-        Scanner in = new Scanner(Paths.get("F:\\java\\HelloWorld.java"));
-        String s5 = null;
-       do{
-           s5 = in.nextLine();
-           System.out.println(s5);
-       } while( (in.nextLine()) != null );
+        Scanner in = new Scanner(Paths.get("E:\\src\\Hello.java"));
+//       do{
+//           s5 = in.nextLine();
+//           System.out.println(s5);
+//       } while( (in.nextLine()) != null );
 
-
+//       while((s5=in.nextLine())!=null){
+//    	   System.out.println(s5);
+//       }
+       
+       while (in.hasNextLine()) {
+           System.out.println(in.nextLine());
+       }
+       
+       
         in.close();
 
-        PrintWriter out = new PrintWriter("F:\\java\\new.java");
+        PrintWriter out = new PrintWriter("E:\\src\\Hello.java");
 
 
 
