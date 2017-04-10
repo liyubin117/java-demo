@@ -71,11 +71,14 @@ public class ArrayListDemo1 {
 		}
 		System.out.println();
 		
+		System.out.println("Arrays.toString遍历："+Arrays.toString(obj));
+		
 		System.out.print("size get遍历:");
 		for(int a=0;a<ls.size();a++){
 			System.out.print(ls.get(a)+" ");
 		}
 		System.out.println();
+		
 
 
 	}
