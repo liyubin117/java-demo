@@ -9,6 +9,7 @@ import java.util.Arrays;
 public class ArrayDemo3 {
 
     public static void main(String[] args){
+    	//动态初始化：只指定初始数组大小
         int [] a = new int[10];
         for (int m=0;m<a.length;m++){
             a[m] = m;
@@ -19,7 +20,7 @@ public class ArrayDemo3 {
         for (int i: a) {
             System.out.print(i);
         }
-        //创建数组的同时，赋予初始值
+        //静态初始化：创建数组的同时，赋予初始值
         int [] b = {1,2,7,8,9,10};
         System.out.println("\nb:"+Arrays.toString(b));
         //数组拷贝
