@@ -10,5 +10,8 @@ public class Main {
 		bt.add(-1);
 		bt.add(9);
 		bt.print();
+		
+		GeneralHashFunctionLibrary hfl=new GeneralHashFunctionLibrary();
+		System.out.println(hfl.RSHash("liyubin LIYUBIN "));
 	}
 }
