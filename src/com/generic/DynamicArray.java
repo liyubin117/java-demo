@@ -50,13 +50,19 @@ public class DynamicArray<E> {
 	    }
 	}
 	
+	//<? extends E> 读，可以由<T extends E> DynamicArray(T)代替
 	public void addAll2(DynamicArray<? extends E> c) {
 	    for(int i=0; i<c.size; i++){
 	        add(c.get(i));
 	    }
 	}
 	
-
+	//<? super E> 写
+	public void copyTo(DynamicArray<? super E> dest){
+	    for(int i=0; i<size; i++){
+	        dest.add(get(i));
+	    }
+	}
 	/**
 	 * @param args
 	 */
@@ -67,6 +73,7 @@ public class DynamicArray<E> {
 		ints.add(34);
 		numbers.addAll(ints);
 		numbers.addAll2(ints);
+		ints.copyTo(numbers);
 		
 		for(int i=0;i<numbers.size;i++){
 			System.out.print(numbers.get(i)+" ");
