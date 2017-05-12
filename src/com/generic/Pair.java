@@ -20,4 +20,14 @@ public class Pair<U,V>{
 	public static <U,V> Pair<U,V> newPair(U u,V v){
 		return (new Pair<U,V>(u,v));
 	}
+	//通配符?
+	//? extends 用于读取
+	public Pair<U,V> overCurrPair(Pair<? extends U,? extends V> pair){
+		return new Pair<U,V>(pair.getFirst(),pair.getSecond());
+	}
+	//? super 用于写入
+	public void overArgPair(Pair<? super U,? super V> pair){
+		pair.first=first;
+		pair.second=second;
+	}
 }
