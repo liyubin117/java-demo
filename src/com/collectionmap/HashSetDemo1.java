@@ -1,5 +1,6 @@
 package com.collectionmap;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 //HashSet只实现Comparable接口仍是不足以去重的，还需重写equals、hashCode方法
@@ -67,5 +68,9 @@ public class HashSetDemo1 {
 		sp.add(new Person2("孙七",25));
 		System.out.println(sp);
 		
+		Set<String> ss=new HashSet<>();
+		ss.add("c");
+		ss.addAll(Arrays.asList("a","a","b","c","d","b"));
+		System.out.println(Arrays.toString(ss.toArray()));
 	}
 }

@@ -19,6 +19,10 @@ public class HashMapDemo {
 		        countMap.put(num, count+1);
 		    }
 		}
+		
+		System.out.println(countMap.containsKey(10));
+		System.out.println(countMap.containsValue(100));
+		countMap.remove(3);
 
 		for(Map.Entry<Integer, Integer> kv : countMap.entrySet()){
 		    System.out.println(kv.getKey()+","+kv.getValue());
