@@ -2,13 +2,23 @@ package com.collectionmap;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 public class TreeMapDemo {
+	//打印映射
+	public static void printMap(Map<? extends Object,? extends Object> map){
+		for(Entry<? extends Object, ? extends Object> kv : map.entrySet()){
+		    System.out.print(kv.getKey()+"="+kv.getValue()+" ");
+		}
+		System.out.println();
+	}
 	
 	public static void main(String[] args) {
 		Map<String, String> map  = new TreeMap<>();
@@ -16,18 +26,15 @@ public class TreeMapDemo {
 		map.put("c", "call");
 		map.put("b", "basic");
 		map.put("T", "tree");
-		for(Entry<String,String> kv : map.entrySet()){
-		    System.out.print(kv.getKey()+"="+kv.getValue()+" ");
-		}
-		System.out.println();
+		Map<String, String> hashMap  = new HashMap<>(map);
+		System.out.print("原始映射："); TreeMapDemo.printMap(hashMap);
+		TreeMapDemo.printMap(map);
 		
 		//不区分大小写
 		Map<String, String> map2  = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 		map2.putAll(map);
-		for(Entry<String,String> kv : map2.entrySet()){
-		    System.out.print(kv.getKey()+"="+kv.getValue()+" ");
-		}
-		System.out.println();
+		TreeMapDemo.printMap(map2);
+
 		
 		//使用自定义Comparator，逆序输出
 		//Collections.reverseOrder() 逆序比较器
@@ -41,10 +48,7 @@ public class TreeMapDemo {
 				}
 		);
 		map3.putAll(map);
-		for(Entry<String,String> kv : map3.entrySet()){
-		    System.out.print(kv.getKey()+"="+kv.getValue()+" ");
-		}
-		System.out.println();
+		TreeMapDemo.printMap(map3);
 		
 		//比较日期
 		Map<String, Integer> map4  = new TreeMap<>(new Comparator<String>() {
@@ -60,7 +64,19 @@ public class TreeMapDemo {
 		        }
 		    }
 		});
+		map4.put("2016-7-3", 100);
+		map4.put("2016-7-10", 120);
+		map4.put("2016-8-1", 90);
+		TreeMapDemo.printMap(map4);
 		
+		//Navigatable接口
+		NavigableMap<String, String> navigatableMap  = new TreeMap<>(map);
+		System.out.println(navigatableMap.firstEntry());
+		System.out.println(navigatableMap.lastEntry());
+		System.out.println(navigatableMap.floorEntry("d"));
+		System.out.println(navigatableMap.ceilingEntry("d"));
+		System.out.println(navigatableMap.descendingMap()
+		        .subMap("d", false, "a", true));
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.collectionmap;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.TreeSet;
 
@@ -13,16 +14,10 @@ public class SetDemo1 {
 		hss.add("E");
 		hss.add("D");	
 		hss.add("H");
-		System.out.println(hss);
+		System.out.println(hss.toString());
 		
 		TreeSet<String> tss=new TreeSet<String>();
-		tss.add("C");
-		tss.add("A");
-		tss.add("A");
-		tss.add("B");		
-		tss.add("E");
-		tss.add("D");	
-		tss.add("H");
+		tss.addAll(hss);
 		System.out.println(tss);
 
 	}

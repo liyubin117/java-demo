@@ -1,6 +1,7 @@
 package com.useful;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 class Personc implements Comparable<Personc>{
 	private String name;
@@ -28,6 +29,31 @@ class Personc implements Comparable<Personc>{
 	}	
 }
 
+class ComparableString{
+	private String t;
+	
+	public ComparableString(String s){
+		this.t=s;
+	}
+	public int compareTo(Comparable<? extends String> o) {
+		return t.compareTo((String) o);
+	}
+}
+
+class ComparatorObject<T>{
+	private Comparator<? super T> cpr;
+	private T t;
+	
+	public ComparatorObject(T t){
+		this.t=t;
+	}
+	
+	public int compare(T o,Comparator<? super T> c){
+		this.cpr=c;
+		return cpr.compare(t, o);
+	}
+}
+
 public class ComparableDemo1 {
 	public static void main(String[] args){
 		Personc p1=new Personc("li",24);
@@ -36,5 +62,19 @@ public class ComparableDemo1 {
 		Personc[] ps={p1,p2,p3};
 		Arrays.sort(ps);
 		System.out.println(Arrays.toString(ps));
+		
+		
+		ComparableString cs=new ComparableString("a");
+		Object co="b";
+		System.out.println(cs.compareTo((Comparable<? extends String>) co));
+		
+		ComparatorObject<Double> cd=new ComparatorObject<>(10.3);
+		System.out.println(cd.compare(10.1, new Comparator<Number>(){
+			@Override
+			public int compare(Number o1, Number o2) {
+				return ((Double)o1).compareTo((Double) o2);
+			}	
+		}
+		));
 	}
 }
