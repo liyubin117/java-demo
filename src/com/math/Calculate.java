@@ -129,9 +129,5 @@ public class Calculate {
         System.out.println(bi.multiply(bi2));
 
 
-
-
-
-
     }
 }
