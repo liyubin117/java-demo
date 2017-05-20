@@ -1,7 +1,8 @@
 package com.memoryctl;
 //初始化子类对象
-//从最顶层初始化开始，依次往下逐层初始化。在同一层内，先初始化非表态初始化块，再根据子类构造器调用本类符合条件的构造器
+//从最顶层初始化开始，依次往下逐层初始化。在同一层内，先初始化非静态初始化块，再根据子类构造器调用本类符合条件的构造器
 //若子类构造器无super调用，则隐式调用父类无参构造器
+//super和this都只能用在构造器的第一行
 public class ConstructorFather {
 	public static void main(String[] args) {
 		new Wolf(5.5);
