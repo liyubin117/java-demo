@@ -12,11 +12,11 @@ public class BinaryTree {
         BNode current = root;  
         while(current.key != key) {  
             if(key < current.key) {  
-                current = current.leftChild;  
+                current = current.leftChild;
             }  
             else {  
                 current = current.rightChild;  
-            }  
+            }
             if(current == null) {  
                 return null;  
             }  
@@ -37,7 +37,7 @@ public class BinaryTree {
             BNode parent;  
             while(true) {  
                 parent = current;  
-                if(key < current.data) { //turn left  
+                if(key < current.key) { //turn left  
                     current = current.leftChild;  
                     if(current == null) {  
                         parent.leftChild = newNode;  
@@ -105,7 +105,7 @@ public class BinaryTree {
     }  
       
     //查找最小值  
-    /*根据二叉搜索树的存储规则，最小值应该是左边那个没有子节点的那个节点*/  
+    /*根据二叉搜索树的存储规则，最小值应该是最左边子节点*/  
     public BNode minNumber() {  
         BNode current = root;  
         BNode parent = root;  
@@ -117,7 +117,7 @@ public class BinaryTree {
     }  
       
     //查找最大值  
-    /*根据二叉搜索树的存储规则，最大值应该是右边那个没有子节点的那个节点*/  
+    /*根据二叉搜索树的存储规则，最大值应该是最右边子节点*/  
     public BNode maxNumber() {  
         BNode current = root;  
         BNode parent = root;  
@@ -145,7 +145,7 @@ public class BinaryTree {
             return false;  
         }  
         //寻找要删除的节点  
-        while(current.data != key) {  
+        while(current.key != key) {  
 //          parent = current;  
             if(key < current.key) {  
                 isLeftChild = true;  
@@ -155,7 +155,7 @@ public class BinaryTree {
                 isLeftChild = false;  
                 current = current.rightChild;  
             }
-            //TODO:没有必要吧？已经在while条件里验证过了
+            //有必要，在前面的一轮if后，current发生变化需要再次判断
             if(current == null) {  
                 return false;  
             }  
@@ -228,8 +228,12 @@ public class BinaryTree {
     public boolean deleteTwoChild(BNode node, boolean isLeftChild) {  
         BNode successor = getSuccessor(node);  
         if(node == root) {  
+            // 这里主要是防止在删除根节点的右节点的左节点为空时出错  
+            if (root.rightChild.leftChild == null)  
+                successor.rightChild = node.rightChild.rightChild;  
+            else  
+                successor.rightChild = node.rightChild;  
             successor.leftChild = root.leftChild;  
-            successor.rightChild = root.rightChild;  
             successor.parent = null;  
             root = successor;  
         }  
@@ -243,14 +247,17 @@ public class BinaryTree {
         return true;  
     }  
       
-    //获得要删除节点的后继节点（中序遍历的下一个节点）  
+    //获得要删除节点的后继节点（中序遍历的下一个节点，待删节点右子树的最左子节点）  
     public BNode getSuccessor(BNode delNode) {  
         BNode successor = delNode;  
         BNode current = delNode.rightChild;  
         while(current != null) {  
             successor = current;  
             current = current.leftChild;  
-        }  
+        }
+        
+        //后继节点非待删节点的右节点，即上面那个while至少执行过两次或未执行即待删节点右子点有左子点或无右子点。
+        //若只执行过一次即待删节点右子点无左子点，待删节点右子点即后继节点，则不用经过下面这些过程直接返回即可。
         if(successor != delNode.rightChild) {  
             successor.parent.leftChild = successor.rightChild;  
             if(successor.rightChild != null) {        
