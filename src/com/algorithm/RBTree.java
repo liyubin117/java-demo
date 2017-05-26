@@ -432,6 +432,7 @@ public class RBTree<T extends Comparable<T>> {
 		RBNode<T> child, parent;
 		boolean color;
 		
+		//TODO:还要考虑无子节点、单子节点的情况，目前还没写
 		//1. 被删除的节点“左右子节点都不为空”的情况
 		if((node.left != null) && (node.right != null)) {
 			//先找到被删除节点的后继节点，用它来取代被删除节点的位置
