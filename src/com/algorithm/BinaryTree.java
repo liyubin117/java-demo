@@ -1,55 +1,275 @@
 package com.algorithm;
-
-public class BinaryTree {
-	//声明节点类
-	class Node{
-		private Comparable data; //保存具体的内容
-		private Node left; //保存左子树
-		private Node right; //保存右子树	
-		//构造器
-		public Node(Comparable data){
-			this.data=data;
-		}
-		//增加节点
-		public void addNode(Node newNode){
-			if(this.data.compareTo(newNode.data)>0){  //新节点较小，放在左子树
-				if(this.left==null){
-					this.left=newNode;
-				}else{
-					this.left.addNode(newNode);
-				}
-			}
-			if(this.data.compareTo(newNode.data)<0){  //新节点较大，放在右子树
-				if(this.right==null){
-					this.right=newNode;
-				}else{
-					this.right.addNode(newNode);
-				}
-			}
-		}
-		//输出时中序遍历
-		public void printNode(){
-			if(this.left!=null){
-				this.left.printNode();
-			}
-			System.out.print(this.data+"\t");
-			if(this.right!=null){
-				this.right.printNode();
-			}
-		}
-	}
-	
-	private Node root;
-	public void add(Comparable data){
-		Node newNode=new Node(data);
-		if(root==null){
-			root=newNode;
-		}else{
-			root.addNode(newNode);
-		}
-	}
-	public void print(){
-		this.root.printNode();
-	}
-	
-}
+//排序二叉树（完整实现，插入、遍历、查找、最小、最大、后继、删除）
+public class BinaryTree {  
+    private BNode root; //根节点  
+      
+    public BinaryTree() {  
+        root = null;  
+    }  
+      
+    //二叉搜索树查找的时间复杂度为O(logN)  
+    public BNode find(int key) { //find node with given key  
+        BNode current = root;  
+        while(current.key != key) {  
+            if(key < current.key) {  
+                current = current.leftChild;  
+            }  
+            else {  
+                current = current.rightChild;  
+            }  
+            if(current == null) {  
+                return null;  
+            }  
+        }  
+        return current;  
+    }  
+      
+    //插入节点  
+    public void insert(int key, double value) {  
+        BNode newNode = new BNode();  
+        newNode.key = key;  
+        newNode.data = value;  
+        if(root == null) { //if tree is null  
+            root = newNode;  
+        }  
+        else {  
+            BNode current = root;  
+            BNode parent;  
+            while(true) {  
+                parent = current;  
+                if(key < current.data) { //turn left  
+                    current = current.leftChild;  
+                    if(current == null) {  
+                        parent.leftChild = newNode;  
+                        newNode.parent = parent;  
+                        return;  
+                    }  
+                }  
+                else { //turn right  
+                    current = current.rightChild;  
+                    if(current == null) {  
+                        parent.rightChild = newNode;  
+                        newNode.parent = parent;  
+                        return;  
+                    }  
+                }  
+            }  
+        }  
+    }  
+      
+    //遍历二叉树  
+    public void traverse(int traverseType) {  
+        switch(traverseType)  
+        {  
+        case 1: System.out.println("Preorder traversal:");  
+                preOrder(root);//前向遍历  
+                break;  
+        case 2: System.out.println("Inorder traversal:");  
+                inOrder(root);//中向遍历  
+                break;  
+        case 3: System.out.println("Postorder traversal:");  
+                postOrder(root);//后向遍历  
+                break;  
+        default: System.out.println("Inorder traversal:");  
+                inOrder(root);  
+                break;  
+        }  
+        System.out.println("");  
+    }  
+      
+    //前向遍历  
+    private void preOrder(BNode localRoot) {  
+        if(localRoot != null) {  
+            System.out.print(localRoot.data + " ");  
+            preOrder(localRoot.leftChild);  
+            preOrder(localRoot.rightChild);  
+        }  
+    }  
+      
+    //中向遍历  
+    private void inOrder(BNode localRoot) {  
+        if(localRoot != null) {  
+            inOrder(localRoot.leftChild);  
+            System.out.print(localRoot.data + " ");  
+            inOrder(localRoot.rightChild);  
+        }  
+    }  
+      
+    //后向遍历  
+    private void postOrder(BNode localRoot) {  
+        if(localRoot != null) {  
+            postOrder(localRoot.leftChild);  
+            postOrder(localRoot.rightChild);  
+            System.out.print(localRoot.data + " ");  
+        }  
+    }  
+      
+    //查找最小值  
+    /*根据二叉搜索树的存储规则，最小值应该是左边那个没有子节点的那个节点*/  
+    public BNode minNumber() {  
+        BNode current = root;  
+        BNode parent = root;  
+        while(current != null) {  
+            parent = current;  
+            current = current.leftChild;  
+        }     
+        return parent;  
+    }  
+      
+    //查找最大值  
+    /*根据二叉搜索树的存储规则，最大值应该是右边那个没有子节点的那个节点*/  
+    public BNode maxNumber() {  
+        BNode current = root;  
+        BNode parent = root;  
+        while(current != null) {  
+            parent = current;  
+            current = current.rightChild;  
+        }     
+        return parent;  
+    }  
+      
+    //删除节点  
+    /* 
+     * 删除节点在二叉树中是最复杂的，主要有三种情况： 
+     * 1. 该节点没有子节点（简单，直接删除） 
+     * 2. 该节点有一个子节点（还行，若是根节点，则用子节点替换根节点；其他情况直接将待删除节点的父节点与其子节点相连） 
+     * 3. 该节点有两个子节点（复杂，关键是用待删除节点的后继节点替换待删除节点） 
+     * 删除节点的时间复杂度为O(logN) 
+     */  
+    public boolean delete(int key) {  
+        BNode current = root;  
+//      BNode parent = root;  
+        boolean isLeftChild = true;  
+          
+        if(current == null) {  
+            return false;  
+        }  
+        //寻找要删除的节点  
+        while(current.data != key) {  
+//          parent = current;  
+            if(key < current.key) {  
+                isLeftChild = true;  
+                current = current.leftChild;  
+            }  
+            else {  
+                isLeftChild = false;  
+                current = current.rightChild;  
+            }
+            //TODO:没有必要吧？已经在while条件里验证过了
+            if(current == null) {  
+                return false;  
+            }  
+        }  
+          
+        //找到了要删除的节点，下面开始删除  
+        //1. 要删除的节点没有子节点,直接将其父节点的左子节点或者右子节点赋为null即可  
+        if(current.leftChild == null && current.rightChild == null) {  
+            return deleteNoChild(current, isLeftChild);  
+        }  
+          
+        //3. 要删除的节点有两个子节点  
+        else if(current.leftChild != null && current.rightChild != null) {  
+            return deleteTwoChild(current, isLeftChild);  
+        }  
+          
+        //2. 要删除的节点有一个子节点，直接将其砍断，将其子节点与其父节点连起来即可，要考虑特殊情况就是删除根节点，因为根节点没有父节点  
+        else {  
+            return deleteOneChild(current, isLeftChild);  
+        }  
+          
+    }  
+      
+    public boolean deleteNoChild(BNode node, boolean isLeftChild) {  
+        if(node == root) {  
+            root = null;  
+            return true;  
+        }  
+        if(isLeftChild) {  
+            node.parent.leftChild = null;  
+        }  
+        else {  
+            node.parent.rightChild = null;  
+        }  
+        return true;  
+    }  
+      
+    public boolean deleteOneChild(BNode node, boolean isLeftChild) {  
+        if(node.leftChild == null) {  
+            if(node == root) {  
+                root = node.rightChild;  
+                node.parent = null;  
+                return true;  
+            }  
+            if(isLeftChild) {  
+                node.parent.leftChild  = node.rightChild;  
+            }  
+            else {  
+                node.parent.rightChild = node.rightChild;  
+            }  
+            node.rightChild.parent = node.parent;  
+        }  
+        else {  
+            if(node == root) {  
+                root = node.leftChild;  
+                node.parent = null;  
+                return true;  
+            }  
+            if(isLeftChild) {  
+                node.parent.leftChild  = node.leftChild;  
+            }  
+            else {  
+                node.parent.rightChild = node.leftChild;  
+            }  
+            node.leftChild.parent = node.parent;  
+        }  
+        return true;  
+    }  
+      
+    public boolean deleteTwoChild(BNode node, boolean isLeftChild) {  
+        BNode successor = getSuccessor(node);  
+        if(node == root) {  
+            successor.leftChild = root.leftChild;  
+            successor.rightChild = root.rightChild;  
+            successor.parent = null;  
+            root = successor;  
+        }  
+        else if(isLeftChild) {  
+            node.parent.leftChild = successor;  
+        }  
+        else {  
+            node.parent.rightChild = successor;  
+        }  
+        successor.leftChild = node.leftChild;//connect successor to node's left child  
+        return true;  
+    }  
+      
+    //获得要删除节点的后继节点（中序遍历的下一个节点）  
+    public BNode getSuccessor(BNode delNode) {  
+        BNode successor = delNode;  
+        BNode current = delNode.rightChild;  
+        while(current != null) {  
+            successor = current;  
+            current = current.leftChild;  
+        }  
+        if(successor != delNode.rightChild) {  
+            successor.parent.leftChild = successor.rightChild;  
+            if(successor.rightChild != null) {        
+                successor.rightChild.parent = successor.parent;//删除后续节点在原来的位置  
+            }  
+            successor.rightChild = delNode.rightChild;//将后续节点放到正确位置，与右边连上  
+        }  
+        return successor;  
+    }  
+}  
+  
+class BNode {  
+    public int key;  
+    public double data;  
+    public BNode parent;  
+    public BNode leftChild;  
+    public BNode rightChild;  
+      
+    public void displayNode() {  
+        System.out.println("{" + key + ":" + data + "}");  
+    }  
+}  
