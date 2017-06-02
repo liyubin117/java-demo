@@ -475,6 +475,10 @@ public class RBTree<T extends Comparable<T>> {
 			}
 			node = null;
 			return;
+		}else if(node.left==null && node.right==null){ //无子节点
+			
+		}else{	//单子节点
+			
 		}
 	}
 	//node表示待修正的节点，即后继节点的子节点（因为后继节点被挪到删除节点的位置去了）
