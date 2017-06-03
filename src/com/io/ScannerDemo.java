@@ -1,11 +1,16 @@
 package com.io;
 
 import java.io.Console;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
+import com.pubtest.Emp;
 
 /**
  * Created by Administrator on 2015-9-17.
@@ -43,25 +48,21 @@ public class ScannerDemo {
             System.out.println("console is not available");
         }
 
-        //输入、输出文件
-        Scanner in = new Scanner(Paths.get("E:\\src\\Hello.java"));
-//       do{
-//           s5 = in.nextLine();
-//           System.out.println(s5);
-//       } while( (in.nextLine()) != null );
-
-//       while((s5=in.nextLine())!=null){
-//    	   System.out.println(s5);
-//       }
-       
+        //指定行、分隔符
+        File f=new File("file"+File.separator+"Emp2.txt");
+        Scanner in = new Scanner(f);
+        Scanner words = null;
+        List<Emp> lm = new ArrayList<>();
        while (in.hasNextLine()) {
-           System.out.println(in.nextLine());
+    	   String line=in.nextLine();
+           System.out.println(line);
+           words=new Scanner(line).useDelimiter(",");
+           Emp emp=new Emp(words.next(),words.nextInt(),words.nextDouble());
+           lm.add(emp);
        }
-       
-       
         in.close();
+        System.out.println(lm);
 
-        PrintWriter out = new PrintWriter("E:\\src\\Hello.java");
 
 
 

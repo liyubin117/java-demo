@@ -18,7 +18,7 @@ public class FileInOutputStreamDemo1 {
 		//当文件不存在时，自动创建新的
 		//true表示追加写入
 		//使用write(byte b[])写入
-		OutputStream os=new FileOutputStream(f,false);
+		FileOutputStream os=new FileOutputStream(f,false);
 		String s="hello FileOutputStream 100 ";
 		byte[] bytes=s.getBytes();
 		os.write(bytes);
@@ -33,6 +33,10 @@ public class FileInOutputStreamDemo1 {
 		os.write(bytes);
 		//close会强制刷新缓冲区并将内容写入到文件，而字节流未用到缓冲区，不用close也可保存数据
 		//os.close();
+		
+		//使用getFD方法获得文件描述符对象，调用sync方法确保操作系统将数据写入磁盘
+		os.getFD().sync();
+		os.close();
 		
 		//读取
 		//字节数组读取

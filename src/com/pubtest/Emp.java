@@ -23,9 +23,14 @@ public class Emp implements Cloneable {
         }
     }
 
-    public void printEmpInfo(){
+    @Override
+	public String toString() {
+		return "姓名：" + name + " 年龄：" + age + " 薪水：" + salary;
+	}
+
+	public void printEmpInfo(){
         System.out.println("-------------------");
-        System.out.println("������"+name+" ���䣺"+ age+"нˮ��"+salary);
+        System.out.println("姓名："+name+" 年龄："+ age+" 薪水："+salary);
     }
 
     public String getName() {

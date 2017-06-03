@@ -16,19 +16,15 @@ public class DataStreamDemo1 {
 		Properties p=System.getProperties();
 		System.out.println(p.getProperty("file.encoding"));
 		
-		File f=new File(/*"file"+File.separator+*/"c:/"+"testDataStream.file");
+		File f=new File("file"+File.separator+"testDataStream.file");
 		DataOutputStream dos=new DataOutputStream(new FileOutputStream(f));
 		String[] name=new String[]{"衬衣","手套","毛巾"};
 		float[] price=new float[]{98.8f,30.3f,50.5f};
 		int[] nums=new int[]{3,2,1};
-		/*dos.write("品种".getBytes("UTF-8"));
-		dos.writeChar('\t');
-		dos.write("价格".getBytes("UTF-8"));
-		dos.writeChar('\t');
-		dos.write("数量".getBytes("UTF-8"));
-		dos.writeChar('\n');*/
+
 		for(int i=0;i<name.length;i++){
-			dos.write(name[i].getBytes("UTF-8"));
+			//dos.write(name[i].getBytes("UTF-8"));
+			dos.writeUTF(name[i]);
 			dos.writeChar('\t');
 			dos.writeFloat(price[i]);
 			dos.writeChar('\t');
@@ -37,7 +33,7 @@ public class DataStreamDemo1 {
 		}
 		dos.close();
 		
-		//不知道为什么有乱码
+		//不知道为什么有乱码。因为是字节流
 		DataInputStream dis=new DataInputStream(new FileInputStream(f));
 		int len=0;
 		char[] temp;
