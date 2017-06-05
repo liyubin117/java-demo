@@ -83,8 +83,6 @@
 			<artifactId>javax.servlet</artifactId>
 			<version>3.0.0.v201112011016</version>
 		</dependency>
-
-
-
 	</dependencies>
+
 </project>

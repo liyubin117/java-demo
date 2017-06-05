@@ -6,7 +6,8 @@ public class Person implements Serializable{
 	private static final long serialVersionUID=123L;
 
 	String name;
-	int age;
+	transient int age;
+	int add;
 	public Person(String name,int age){
 		this.name=name;
 		this.age=age;
@@ -22,6 +23,6 @@ public class Person implements Serializable{
 	}
 	
 	public String toString(){
-		return "Person:"+this.name+" age:"+this.age;
+		return "Person:"+this.name+" age:"+this.age+" add:"+this.add;
 	}
 }
