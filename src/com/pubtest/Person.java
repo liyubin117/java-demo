@@ -3,7 +3,7 @@ package com.pubtest;
 public class Person implements Cloneable{
 	
 	private String name;
-	private String addr;
+	private transient String addr;
 	private int age;
 	
 	public Person(String name){
