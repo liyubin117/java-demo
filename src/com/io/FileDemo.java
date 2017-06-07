@@ -21,6 +21,7 @@ public class FileDemo {
 		System.out.println("当前路径是："+System.getProperty("user.dir"));
 		System.out.println("绝对路径是："+f.getAbsolutePath());
 		System.out.println("标准绝对路径是："+f.getCanonicalPath());
+		System.out.println("标准文件是："+f.getCanonicalFile());
 		System.out.println("父目录路径："+f2.getParent());
 		System.out.println("有效的父目录路径："+f2.getCanonicalFile().getParent());
 		
