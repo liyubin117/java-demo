@@ -10,7 +10,7 @@ package com.threads;
  * 	•使用volatile关键字
  * 	•使用synchronized关键字或显式锁同步 
  */
-public class VisibilityDemo {
+public class NotVisibility {
     private static boolean shutdown = false;
     
     static class HelloThread extends Thread {
