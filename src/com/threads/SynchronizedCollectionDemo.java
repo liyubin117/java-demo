@@ -1,7 +1,9 @@
 package com.threads;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -15,6 +17,7 @@ import java.util.Map;
 public class SynchronizedCollectionDemo {
 
 	public static void main(String[] args) throws InterruptedException {
+		//复合操作
 		Map<String,Integer> map=new HashMap<>();
 		EnhancedMap<String, Integer> eMap=new EnhancedMap<>(map);
 		
@@ -36,7 +39,19 @@ public class SynchronizedCollectionDemo {
 		}
 		//若是线程安全的，只应该出现一次null，但很可能出现多次
 		System.out.println(eMap);
+		
+		
+		//遍历操作
+		final List<String> list = Collections
+	            .synchronizedList(new ArrayList<String>());
+		//一边修改一边遍历同步容器，会抛出ConcurrentModificationException异常，因为遍历时容器产生了结构性变化，触发异常
+	    SCIterator.startIteratorThread(list);
+	    SCIterator.startModifyThread(list);
+
 	}
+	
+	
+
 
 }
 
@@ -48,7 +63,15 @@ class EnhancedMap <K, V> {
         this.map = Collections.synchronizedMap(map);
     }
     
-    public V putIfAbsent(K key, V value){
+    //伪同步
+    /**
+     * 若只在此处用synchronized修饰putIfAbsent方法，仍无法实现线程安全，是伪同步，因为同步错对象了。
+     * putIfAbsent获得EnhancedMap对象锁，而put是Collections.synchronizedMap(map)返回的map对象的方法，不受此锁影响
+     * 两种解决方法：
+     * 1、都使用EnhancedMap对象锁，即在putIfAbsent和put上都加上synchronized
+     * 2、都使用map对象锁，即在两个方法内的代码块上都加上synchronized(map){}
+     */
+    public synchronized V putIfAbsent(K key, V value){
          V old = map.get(key);
          if(old!=null){
              return old;
@@ -59,6 +82,7 @@ class EnhancedMap <K, V> {
          return null;
      }
     
+    //synchronized
     public void put(K key, V value){
         map.put(key, value);
     }
@@ -67,11 +91,37 @@ class EnhancedMap <K, V> {
     	return this.map.toString();
     }
 }
-class EnhancedMapThread extends Thread{
 
-	@Override
-	public void run() {
-	
+
+//迭代同步容器，会出现并发问题
+class SCIterator{
+	//修改list的线程
+	public static void startModifyThread(final List<String> list) {
+	    Thread modifyThread = new Thread(new Runnable() {
+	        @Override
+	        public void run() {
+	            for (int i = 0; i < 100; i++) {
+	                list.add("item " + i);
+	                try {
+	                    Thread.sleep((int) (Math.random() * 10));
+	                } catch (InterruptedException e) {
+	                }
+	            }
+	        }
+	    });
+	    modifyThread.start();
 	}
-	
+	//遍历list的线程
+	public static void startIteratorThread(final List<String> list) {
+	    Thread iteratorThread = new Thread(new Runnable() {
+	        @Override
+	        public void run() {
+	            while (true) {
+	                for (String str : list) {
+	                }
+	            }
+	        }
+	    });
+	    iteratorThread.start();
+	}	
 }
