@@ -56,6 +56,10 @@ public class SynchronizedCollectionDemo {
 }
 
 //对一个同步容器进行复合操作的装饰类。会出现并发问题
+/**
+ * 解决方法：
+ * 加锁，将复合操作变为原子操作
+ */
 class EnhancedMap <K, V> {
     Map<K, V> map;
     
@@ -117,8 +121,21 @@ class SCIterator{
 	        @Override
 	        public void run() {
 	            while (true) {
-	                for (String str : list) {
-	                }
+	            	/**
+	            	 * 解决方法：
+	            	 * 遍历时对整个同步容器对象加锁
+	            	 */
+//	            	synchronized(list){
+	            		System.out.println(list.toString());
+	            		try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+		                for (String str : list) {
+		                }
+//	            	}
+
 	            }
 	        }
 	    });
