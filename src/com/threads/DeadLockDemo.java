@@ -8,24 +8,37 @@ package com.threads;
  * 可使用java自带的jstack命令检测死锁
  */
 public class DeadLockDemo {
-    private static Object lockA = new Object();
-    private static Object lockB = new Object();
+    private static O lockA = new O("lockA");
+    private static O lockB = new O("lockB");
+    
+    static class O{
+    	private String desc;
+    	public O(String desc){
+    		this.desc=desc;
+    	}
+    	public String getDesc(){
+    		return " get lock "+desc;
+    	}
+    }
 
     private static void startThreadA() {
         Thread aThread = new Thread() {
 
             @Override
             public void run() {
-                synchronized (lockA) {
+                synchronized (lockB) {
+                	System.out.println(Thread.currentThread().getName()+lockB.getDesc());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                     }
-                    synchronized (lockB) {
+                    synchronized (lockA) {
+                    	System.out.println(Thread.currentThread().getName()+lockA.getDesc());
                     }
                 }
             }
         };
+        aThread.setName("aThread");
         aThread.start();
     }
 
@@ -33,16 +46,19 @@ public class DeadLockDemo {
         Thread bThread = new Thread() {
             @Override
             public void run() {
-                synchronized (lockB) {
+                synchronized (lockA) {
+                	System.out.println(Thread.currentThread().getName()+lockA.getDesc());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                     }
-                    synchronized (lockA) {
+                    synchronized (lockB) {
+                    	System.out.println(Thread.currentThread().getName()+lockB.getDesc());
                     }
                 }
             }
         };
+        bThread.setName("bThread");
         bThread.start();
     }
 
