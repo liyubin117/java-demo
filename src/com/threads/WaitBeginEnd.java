@@ -1,11 +1,15 @@
 package com.threads;
 
 //多线程协作的两个应用场景：等待开始、等待结束
+//子线程等待开始：共享变量是初始值为1的latch对象，主线程countDown，子线程await，等待条件是>0
+//主线程等待结束：共享变量是初始值为线程数的latch对象，主线程await，子线程countDown，等待条件是>0
 public class WaitBeginEnd {
 
 	public static void main(String[] args) throws InterruptedException {
 		WaitBegin wb=new WaitBegin();
 		wb.judge();
+		Thread.sleep(1000);
+		System.out.println();
 		
 		//使用协作对象，类似于CountDownLatch
 		//等待结束
@@ -18,7 +22,7 @@ public class WaitBeginEnd {
 	    }
 	    latch.await();
 
-	    System.out.println("collect worker results");
+	    System.out.println("wait end has fininished!");
 
 	    //等待开始
 	    int num = 10;
@@ -28,9 +32,9 @@ public class WaitBeginEnd {
             racers[i] = new Racer(latch2);
             racers[i].start();
         }
+        System.out.println("wait begin....");
         Thread.sleep(3000);
         latch2.countDown();
-
 
 	}
 
