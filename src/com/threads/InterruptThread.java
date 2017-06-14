@@ -1,5 +1,7 @@
 package com.threads;
 
+import java.io.IOException;
+
 //线程对中断的反应
 public class InterruptThread {
 
@@ -25,6 +27,12 @@ public class InterruptThread {
 		
 		InterruptNotAlive.test();
 		
+		
+		InterruptRead t = new InterruptRead();
+        t.start();
+        Thread.sleep(100);
+//        t.interrupt();
+		t.cancel();
 	}
 
 }
@@ -113,5 +121,29 @@ class InterruptNotAlive extends Thread{
 		System.out.println("Terminate thread isInterrupted:"+s.isInterrupted());
 		
 	}
+}
+
+
+class InterruptRead extends Thread{
+        @Override
+        public void run() {
+            while(!Thread.currentThread().isInterrupted()){
+                try {
+                    System.out.println(System.in.read());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }    
+            }
+            System.out.println("exit");
+        }
+        
+        //可以中断read调用，调用流的close方法
+        public void cancel() {
+            try {
+                System.in.close();
+            } catch (IOException e) {
+            }
+            interrupt();
+        }
 }
 

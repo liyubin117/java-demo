@@ -10,6 +10,12 @@ public class DoubleAndFloat {
         System.out.println("0.2d==0.2 "+(0.2d==0.2));
         System.out.println("0.2d<0.2f "+(0.2d<0.2f));
         System.out.println("0.2f>0.2 "+(0.2f>0.2));
+        
+        //float、integer间位转换
+        int i=Float.floatToIntBits(10.8f);
+        System.out.println(i);
+        float f=Float.intBitsToFloat(8999);
+        System.out.println(f);
 	}
 
 }
