@@ -30,4 +30,8 @@ public class Pair<U,V>{
 		pair.first=first;
 		pair.second=second;
 	}
+	
+	public String toString(){
+		return "[first:"+this.first.toString()+" second:"+this.second.toString()+"]";
+	}
 }
