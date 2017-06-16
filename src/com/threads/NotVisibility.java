@@ -11,6 +11,20 @@ package com.threads;
  * 	•使用synchronized关键字或显式锁同步 
  */
 public class NotVisibility {
+    public static void main(String[] args) throws InterruptedException {
+//        new HelloThread().start();
+//        Thread.sleep(1000);
+//        shutdown = true;
+//        System.out.println("exit main");
+        
+    	//竞态条件问题产生两种结果：42、unknown，内存可见性问题产生一种结果：0
+        s1.start();
+        s2.start();
+        s1.join();
+        s2.join();
+    }
+    
+    //第一个例子
     private static boolean shutdown = false;
     
     static class HelloThread extends Thread {
@@ -22,11 +36,25 @@ public class NotVisibility {
             System.out.println("exit hello");
         }
     }
-
-    public static void main(String[] args) throws InterruptedException {
-        new HelloThread().start();
-        Thread.sleep(1000);
-        shutdown = true;
-        System.out.println("exit main");
-    }
+    
+    
+    //第二个例子
+    private static boolean answerReady=false;
+    private static int answer=0;
+    
+    private static Thread s1=new Thread(){
+    	public void run(){
+    		answerReady=true;
+    		answer=42;
+    	}
+    };
+    private static Thread s2=new Thread(){
+    	public void run(){
+    		if(answerReady){
+    			System.out.println("the meaning of life is "+answer);
+    		}else{
+    			System.out.println("the meaning of life is unknown");
+    		}
+    	}
+    };
 }

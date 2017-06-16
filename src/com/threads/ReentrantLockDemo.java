@@ -2,6 +2,7 @@ package com.threads;
 
 import java.util.Random;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.pubtest.Account;
@@ -13,7 +14,7 @@ public class ReentrantLockDemo {
 		CounterLock i=new CounterLock();
 		i.oper(1000);
 		//非阻塞获取锁tryLock可以避免死锁发生
-		AccountMgr.simulate(2, 3,false);
+		AccountMgr.simulate(2, 3,true);
 		
 		Thread.sleep(1500);
 		ReentrantLock lock=new ReentrantLock();
@@ -23,6 +24,24 @@ public class ReentrantLockDemo {
 		System.out.println("锁等待策略是否公平："+lock.isFair());
 		System.out.println("是否有线程在等待该锁："+lock.hasQueuedThreads());
 		System.out.println("在等待该锁的线程数："+lock.getQueueLength());
+		
+		//ReentrantLock是用LockSupport和CAS实现的
+		 Thread t = new Thread (){
+		        public void run(){
+		        	//线程t调用park后，会放弃CPU进入WAITING状态，main线程调用unpark唤醒。
+		            LockSupport.park();
+		            System.out.println("thread t exit");
+		            if(Thread.currentThread().isInterrupted()){
+		            	System.out.println("thread t interrupted");
+		            }
+		        }
+		    };
+		    t.start();    
+		    Thread.sleep(1000);
+		    //park是响应中断的
+		    t.interrupt();
+//		    LockSupport.unpark(t);
+
 	}
 
 }
