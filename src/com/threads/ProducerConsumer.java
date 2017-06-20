@@ -1,7 +1,6 @@
 package com.threads;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
+import com.threads.BlockingQueue.MyBlockingQueue;
 
 //线程协作的应用：生产者/消费者模式
 /**
@@ -14,46 +13,11 @@ import java.util.Queue;
  */
 public class ProducerConsumer {
 
-	public static void main(String[] args) {
-		MyBlockingQueue<String> queue = new MyBlockingQueue<>(10);
-	    new Producer(queue).start();
-	    new Consumer(queue).start();
-
-	}
-	
-	//协作的共享变量是队列
-	static class MyBlockingQueue<E> {
-	    private Queue<E> queue = null;
-	    private int limit;
-
-	    public MyBlockingQueue(int limit) {
-	        this.limit = limit;
-	        queue = new ArrayDeque<>(limit);
-	    }
-
-	    public synchronized void put(E e) throws InterruptedException {
-	        while (queue.size() == limit) {
-	            wait();
-	        }
-	        queue.add(e);
-	        notifyAll();
-	    }
-
-	    public synchronized E take() throws InterruptedException {
-	        while (queue.isEmpty()) {
-	            wait();
-	        }
-	        E e = queue.poll();
-	        notifyAll();
-	        return e;
-	    }
-	}
-	
 	//生产者
 	static class Producer extends Thread {
-	    MyBlockingQueue<String> queue;
+	    BlockingQueue<String> queue;
 
-	    public Producer(MyBlockingQueue<String> queue) {
+	    public Producer(BlockingQueue<String> queue) {
 	        this.queue = queue;
 	    }
 
@@ -75,9 +39,9 @@ public class ProducerConsumer {
 	
 	//消费者
 	static class Consumer extends Thread {
-	    MyBlockingQueue<String> queue;
+		BlockingQueue<String> queue;
 
-	    public Consumer(MyBlockingQueue<String> queue) {
+	    public Consumer(BlockingQueue<String> queue) {
 	        this.queue = queue;
 	    }
 
@@ -92,6 +56,13 @@ public class ProducerConsumer {
 	        } catch (InterruptedException e) {
 	        }
 	    }
+	}
+	
+	public static void main(String[] args) {
+		BlockingQueue<String> queue = new MyBlockingQueue<>(10);
+	    new Producer(queue).start();
+	    new Consumer(queue).start();
+
 	}
 }
 
