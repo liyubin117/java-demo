@@ -19,7 +19,7 @@ public class SynchronizedCollectionDemo {
 	public static void main(String[] args) throws InterruptedException {
 		//复合操作
 		Map<String,Integer> map=new HashMap<>();
-		EnhancedMap<String, Integer> eMap=new EnhancedMap<>(map);
+		final EnhancedMap<String, Integer> eMap=new EnhancedMap<>(map);
 		
 		Runnable  run=new Runnable(){
 			@Override
@@ -47,19 +47,10 @@ public class SynchronizedCollectionDemo {
 		//一边修改一边遍历同步容器，会抛出ConcurrentModificationException异常，因为遍历时容器产生了结构性变化，触发异常
 	    SCIterator.startIteratorThread(list);
 	    SCIterator.startModifyThread(list);
-
 	}
-	
-	
-
-
 }
 
 //对一个同步容器进行复合操作的装饰类。会出现并发问题
-/**
- * 解决方法：
- * 加锁，将复合操作变为原子操作
- */
 class EnhancedMap <K, V> {
     Map<K, V> map;
     
@@ -67,15 +58,13 @@ class EnhancedMap <K, V> {
         this.map = Collections.synchronizedMap(map);
     }
     
-    //伪同步
     /**
-     * 若只在此处用synchronized修饰putIfAbsent方法，仍无法实现线程安全，是伪同步，因为同步错对象了。
-     * putIfAbsent获得EnhancedMap对象锁，而put是Collections.synchronizedMap(map)返回的map对象的方法，不受此锁影响
-     * 两种解决方法：
-     * 1、都使用EnhancedMap对象锁，即在putIfAbsent和put上都加上synchronized
-     * 2、都使用map对象锁，即在两个方法内的代码块上都加上synchronized(map){}
+     * 解决方法：
+     * 加锁，将复合操作变为原子操作
      */
-    public synchronized V putIfAbsent(K key, V value){
+    public 
+    //synchronized 
+    V putIfAbsent(K key, V value){
          V old = map.get(key);
          if(old!=null){
              return old;
@@ -86,6 +75,14 @@ class EnhancedMap <K, V> {
          return null;
      }
     
+    //伪同步
+    /**
+     * 若只在此处用synchronized修饰putIfAbsent方法，仍无法实现线程安全，是伪同步，因为同步错对象了。
+     * putIfAbsent获得EnhancedMap对象锁，而put是Collections.synchronizedMap(map)返回的map对象的方法，不受此锁影响
+     * 两种解决方法：
+     * 1、都使用EnhancedMap对象锁，即在putIfAbsent和put上都加上synchronized
+     * 2、都使用map对象锁，即在两个方法内的代码块上都加上synchronized(map){}
+     */
     //synchronized
     public void put(K key, V value){
         map.put(key, value);
@@ -95,7 +92,6 @@ class EnhancedMap <K, V> {
     	return this.map.toString();
     }
 }
-
 
 //迭代同步容器，会出现并发问题
 class SCIterator{
@@ -128,17 +124,17 @@ class SCIterator{
 //	            	synchronized(list){
 	            		System.out.println(list.toString());
 	            		try {
-							Thread.sleep(1000);
+							Thread.sleep((int) (Math.random() * 10));
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
-		                for (String str : list) {
+		                for (@SuppressWarnings("unused") String str : list) {
 		                }
 //	            	}
-
 	            }
 	        }
 	    });
 	    iteratorThread.start();
 	}	
 }
+

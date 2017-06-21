@@ -31,7 +31,9 @@ public class HashMapDemo {
 		//构造方式
 		//public HashMap(Map<? extends K, ? extends V> m)
 		System.out.println("----构造方法--------");
-		Map<Number, Number> map = new HashMap<>(countMap);
+		//jdk1.7:HashMap<Number,Number>(countMap)
+		//jdk1.8:HashMap<>(countMap)
+		Map<Number, Number> map = new HashMap<Number,Number>(countMap);
 		for(Map.Entry<Number, Number> kv : map.entrySet()){
 		    System.out.println(kv.getKey()+","+kv.getValue());
 		}
