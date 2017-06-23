@@ -104,7 +104,8 @@ class SCIterator{
 	                list.add("item " + i);
 	                try {
 	                    Thread.sleep((int) (Math.random() * 10));
-	                } catch (InterruptedException e) {
+	                } catch (Exception e) {
+	                	return;
 	                }
 	            }
 	        }
