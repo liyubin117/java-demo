@@ -36,7 +36,7 @@ public class ReferenceDemo {
 		
 		System.out.println("free memory:"+run.freeMemory());
 		
-		//弱引用。当内存不够时自动被GC回收
+		//弱引用。只要碰到GC即被回收
 		WeakReference<String> wr=new WeakReference<>("weak reference");
 		System.out.println(wr.get());
 		
