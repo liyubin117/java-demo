@@ -14,10 +14,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 /**
- * 异步执行：
- *
+ * ExecutorService可提交异步任务
+ * 两种返回结果方式：invokeAll所有任务都完成再返回、invokeAny任一任务完成即返回
  */
-public class ExecutorDemo {
+public class ExecutorServiceDemo {
 	//定义任务
     static class Task implements Callable<Integer> {
         @Override
