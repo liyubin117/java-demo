@@ -14,11 +14,11 @@ public abstract class BlockingQueue<E> {
     public abstract E take() throws InterruptedException;
     
     //使用Object对象的wait/notify协作多线程
-    static class  MyBlockingQueue<E> extends BlockingQueue<E>{
+    static class  ObjectBlockingQueue<E> extends BlockingQueue<E>{
     	private Queue<E> queue = null;
         private int limit;
 
-    	public MyBlockingQueue(int limit) {
+    	public ObjectBlockingQueue(int limit) {
     		this.limit = limit;
             queue = new ArrayDeque<>(limit);
 		}

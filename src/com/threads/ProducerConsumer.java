@@ -1,6 +1,6 @@
 package com.threads;
 
-import com.threads.BlockingQueue.MyBlockingQueue;
+import com.threads.BlockingQueue.ObjectBlockingQueue;
 
 //线程协作的应用：生产者/消费者模式
 /**
@@ -59,7 +59,7 @@ public class ProducerConsumer {
 	}
 	
 	public static void main(String[] args) {
-		BlockingQueue<String> queue = new MyBlockingQueue<>(10);
+		BlockingQueue<String> queue = new ObjectBlockingQueue<>(10);
 	    new Producer(queue).start();
 	    new Consumer(queue).start();
 

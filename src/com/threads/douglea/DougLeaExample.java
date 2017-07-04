@@ -1,4 +1,4 @@
-package com.threads;
+package com.threads.douglea;
 /*
   Sample code file for CPJ2e.
 
