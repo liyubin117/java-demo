@@ -1,5 +1,8 @@
 package com.basic;
 
+import java.lang.*;
+import java.lang.Override;
+
 /**
  * Created by Administrator on 2015-9-8.
  * 抽象类、接口和内部类
@@ -7,28 +10,42 @@ package com.basic;
 /*由abstract修饰的方法为抽象方法，抽象方法即只有方法的定义，没有方法体实现，用一个分号结尾。若将抽象方法包含在类中，
         则该类也应该为抽象的，可以理解为，该类也不完整。抽象类由abstract关键字声明。
 抽象类是不能实例化对象的，而一个类不能实例化是没有意义的，所以，需要定义类来继承抽象类。
-        而如果一个类继承了抽象类，则其必须重写其抽象方法（变不完整为完整），除非该类也声明为抽象类。*/
+        而如果一个类继承了抽象类，则其必须重写其抽象方法（变不完整为完整），除非该类也声明为抽象类。
+抽象类可包含非抽象方法*/
 abstract class Shape {
-    private double c;
+    private double c=10;
+    public String content = "Shape";
     public Shape(double c) {
+        System.out.println("Constructor, yes arg");
         this.c = c;
     }
+    public Shape(){} {
+        System.out.println("Constructor, no arg");
+    }
     public abstract double area();
+    public void notAbstract() {System.out.println("a non-abstract function");}
+    public void func() { System.out.println("func from Shape"); }
 }
 
 class Square extends Shape {
     private double c;
+    public String content = "Square";
     public Square(double c) {
         super(c);
     }
+    @Override
     public double area() {
         return 0.0625*c*c;
     }
+    public void getC() {System.out.println(c);}
+    @Override
+    public void func() { System.out.println("func from Square"); }
 }
 class Circle extends Shape{
     private double c;
     public Circle(double c) {
-        super(c);
+//        super(c);
+        this.c = c;
     }
     public double area() {
         return 0.0796*c*c;
@@ -52,6 +69,7 @@ public void run() {
 /*
 接口间可以存在继承关系，一个接口可以通过extends关键字继承另外一个接口。子接口继承了父接口中定义的所有方法。
 对子接口的实现需要实现父接口和子接口中定义的所有方法
+接口不可包含已实现的方法
 */
 interface Hunter  extends Runner {
     public void hunt();
@@ -64,11 +82,24 @@ public class AbstractAndInterface {
     public static void main(String args[]){
         /*抽象类不能实例化
         Shape shape1 = new Shape(1);*/
-        Square square1 = new Square(1000000);
-        Circle circle1 = new Circle(1);
-        System.out.println(square1.area());
-        System.out.println(circle1.area());
 
+        System.out.println("----Square----");
+        Square square1 = new Square(1000000);
+        System.out.println(square1.area());
+        square1.getC();
+
+        System.out.println("----Circle----");
+        Circle circle1 = new Circle(1);
+        System.out.println(circle1.area());
+        circle1.notAbstract();
+
+        System.out.println("----父类引用指向子类对象----");
+        Shape s = new Square(100);
+        s.func();  //子类方法
+//        s.getC();  //父类无此方法
+        System.out.println(s.content);  //父类值
+
+        System.out.println("--------");
        /* 定义抽象类的意义在于：
         为其子类提供一个公共的类型（父类引用指向子类对象）；
         封装子类中的重复内容（成员变量和方法）;
@@ -78,8 +109,8 @@ public class AbstractAndInterface {
         for(int i=0; i<sArr.length; i++) {
             Shape shape = sArr[i];
             System.out.println(shape.area());
-        }     }
+        }
 
-
+    }
 
 }
