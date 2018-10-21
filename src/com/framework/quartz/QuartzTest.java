@@ -9,12 +9,14 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 public class QuartzTest {
 
     private static final Logger logger = LoggerFactory.getLogger(QuartzTest.class);
 
     public static void main(String[] args) {
-        logger.info("current time is: {}",System.currentTimeMillis());
+        logger.info("current time is: {}",new Date(System.currentTimeMillis()));
 
         try {
             //创建scheduler

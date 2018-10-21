@@ -16,6 +16,9 @@ public class TestThread extends Thread{
 
 	public static void main(String[] args) throws InterruptedException {
 		TestThread t1=new TestThread();
+
+		Thread t2 = new Thread(t1, "t2");
+
 		t1.setName("low");
 		
 		Thread.currentThread().setName("high");
