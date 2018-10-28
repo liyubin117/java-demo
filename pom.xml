@@ -125,6 +125,14 @@
 			<version>1.7.2</version>
 		</dependency>
 
+        <!-- disruptor：并发框架 -->
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
+
         <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
