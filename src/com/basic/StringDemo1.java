@@ -1,5 +1,7 @@
 package com.basic;
 
+import java.util.ArrayList;
+
 /**
  * Created by Administrator on 2015-9-16.
  * String类型
@@ -25,6 +27,10 @@ public class StringDemo1 {
             System.out.println("equals相等");
         }
 
+        //按指定格式输出
+        System.out.println(String.format("%s---%s---%s","header","body","..."));
+
+
         //代码点与代码单元
         //length方法返回采用UTF-16编码表示的给定字符串所需要的代码单元数量
         //codePoint返回代码点数量
@@ -42,5 +48,12 @@ public class StringDemo1 {
         	temp[i]='人';
         }
         System.out.println(new String(temp,0,10));
+
+        System.out.println("a|b:c:d".split("\\|").length);
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("a");
+        arrayList.add("b");
+        arrayList.remove(0);
+        System.out.println(arrayList.get(0));
     }
 }
