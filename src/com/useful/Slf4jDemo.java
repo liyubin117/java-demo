@@ -15,5 +15,9 @@ public class Slf4jDemo {
         logger.debug("debug log");
         logger.info("info log");
         logger.error("error log");
+        String id="id1";
+        String symbol="symbol1";
+        logger.debug("slf4j的占位符: {} and symbol : {} ", id, symbol);
+
     }
 }

@@ -30,6 +30,7 @@ public class StringDemo1 {
         //按指定格式输出
         System.out.println(String.format("%s---%s---%s","header","body","..."));
 
+        System.out.println(String.format("%s_format","ball"));
 
         //代码点与代码单元
         //length方法返回采用UTF-16编码表示的给定字符串所需要的代码单元数量

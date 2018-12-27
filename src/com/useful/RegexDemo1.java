@@ -59,5 +59,6 @@ public class RegexDemo1 {
 		for(int i=0;i<ss.length;i++){
 			System.out.print(ss[i]+"\t");
 		}
-	}
+
+    }
 }
