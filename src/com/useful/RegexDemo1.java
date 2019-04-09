@@ -59,6 +59,32 @@ public class RegexDemo1 {
 		for(int i=0;i<ss.length;i++){
 			System.out.print(ss[i]+"\t");
 		}
+        System.out.println();
+
+		String regexStr = "^.*#.*#.*#.*$";
+		String str = "10001#2018-07-31 16:05:39#000#GameEnd";
+		Matcher matcher = Pattern.compile(regexStr).matcher(str);
+        System.out.println(matcher.groupCount());
+		for(int i=0;i<matcher.groupCount();i++){
+            System.out.println(matcher.group(i));
+        }
+
+        Pattern p=Pattern.compile("([a-z]+)(\\d+)");
+        Matcher m=p.matcher("aaa2223bb");
+        System.out.println(m.find());   //匹配aaa2223
+        System.out.println(m.groupCount());   //返回2,因为有2组
+        System.out.println(m.start(1));   //返回0 返回第一组匹配到的子字符串在字符串中的索引号
+        System.out.println(m.start(2));   //返回3
+        System.out.println(m.end(1));   //返回3 返回第一组匹配到的子字符串的最后一个字符在字符串中的索引位置.
+        System.out.println(m.end(2));   //返回7
+        System.out.println(m.group(1));   //返回aaa,返回第一组匹配到的子字符串
+        System.out.println(m.group(2));   //返回2223,返回第二组匹配到的子字符串
+
+		regexStr = "^lyb_test_%s_format_.*$";
+
+		Pattern p1 = Pattern.compile("^CREATE EXTERNAL TABLE");
+        System.out.println(p1.matcher("CREATE EXTERNAL TABLE T1").find());
+        System.out.println("server string,".split(" ")[0]);
 
     }
 }
