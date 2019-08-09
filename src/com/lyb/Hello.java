@@ -7,7 +7,13 @@ public class Hello{
 	static private int a=1;
 	
 	public static void main(String[] args){
-		
+	    String schema = "com.netease.fuxi.luoge.nsh.model.tables.v1.ChannelChat";
+        System.out.println(schema.indexOf("model.tables"));
+        System.out.println(schema.indexOf(".",schema.indexOf(".")+1));
+
+        System.out.println(
+                "/logs/"+schema.substring(schema.indexOf(".",schema.indexOf(".")+1)+1, schema.indexOf("model.tables")-1).replace(".","/")+ "/" +schema.replace(schema.substring(0, schema.lastIndexOf(".")+1), ""));
+
 		System.out.println("Hello World!");
 		
 		System.out.println("Hello"+" world!"=="Hello world!");

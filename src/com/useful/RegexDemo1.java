@@ -86,5 +86,17 @@ public class RegexDemo1 {
         System.out.println(p1.matcher("CREATE EXTERNAL TABLE T1").find());
         System.out.println("server string,".split(" ")[0]);
 
+        Pattern pattern = Pattern.compile("\\[(\\d{4}-\\d{1,2}-\\d{1,2}) (\\d{2}:\\d{2}:\\d{2})\\]\\s*(\\[(\\d|\\w)+\\]),(.*)$");
+        Matcher mat = pattern.matcher("[2019-01-01 10:00:00][log_id],{\"key\":\"value\",\"k\":\"v\"}");
+        System.out.println(mat.matches());
+        System.out.println(mat.groupCount());
+        System.out.println(mat.group(0));
+        for(int i=1;i<=mat.groupCount();i++){
+            System.out.println(mat.group(i));
+        }
+        System.out.println(mat.group(5));
+
+
+
     }
 }

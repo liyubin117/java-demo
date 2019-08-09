@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class DateFormatDemo1 {
 
@@ -32,6 +33,11 @@ public class DateFormatDemo1 {
 			e.printStackTrace();
 		}
 		System.out.println(sdf.format(d));
+
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZ");
+		df.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+		String timeStamp = df.format(new Date());
+        System.out.println(timeStamp);
 	}
 
 }
