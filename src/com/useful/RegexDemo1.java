@@ -1,4 +1,8 @@
 package com.useful;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;;
 
@@ -86,7 +90,7 @@ public class RegexDemo1 {
         System.out.println(p1.matcher("CREATE EXTERNAL TABLE T1").find());
         System.out.println("server string,".split(" ")[0]);
 
-        Pattern pattern = Pattern.compile("\\[(\\d{4}-\\d{1,2}-\\d{1,2}) (\\d{2}:\\d{2}:\\d{2})\\]\\s*(\\[(\\d|\\w)+\\]),(.*)$");
+        Pattern pattern = Pattern.compile("\\[(\\d{4}-\\d{1,2}-\\d{1,2}) (\\d{2}:\\d{2}:\\d{2})\\]\\s*\\[((\\d|\\w)+)\\],(.*)$");
         Matcher mat = pattern.matcher("[2019-01-01 10:00:00][log_id],{\"key\":\"value\",\"k\":\"v\"}");
         System.out.println(mat.matches());
         System.out.println(mat.groupCount());
@@ -95,8 +99,60 @@ public class RegexDemo1 {
             System.out.println(mat.group(i));
         }
         System.out.println(mat.group(5));
+		System.out.println(mat.group(1));
+        System.out.println(mat.group(1)+" "+mat.group(2));
+        System.out.println(mat.group(3));
 
+        JSONObject object = JSONObject.parseObject("{\"a\":\"A\",\"b\":\"B\"}");
+        object.put("a",1);
+        System.out.println(object.get("a"));
+        JSONObject object2 = (JSONObject) object.clone();
+        object2.put("c","C");
+        System.out.println(object.get("c"));
+        System.out.println(object2.get("c"));
 
+        System.out.println(JSONObject.isValidObject("{\"a\":[\"A\",\"D\"],AF\"b\":\"B\"}"));
 
+        System.out.println(isJSONObject("[{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v1.lybChannelChat\",\"relation\":\"{\\\"message\\\":[\\\"msg\\\",\\\"role_id\\\"],\\\"role_id\\\":[\\\"role_id1\\\"],\\\"role_level\\\":[\\\"role_level\\\"]}\"},{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v2.lybChannelChat\",\"relation\":\"{\\\"message\\\":[\\\"msg\\\",\\\"role_id\\\"],\\\"role_id\\\":[\\\"role_id1\\\"],\\\"role_level2\\\":[\\\"role_level\\\"]}\"},{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v2.lybtest\",\"relation\":\"\\\"role_id\\\":[\\\"role_id1\\\",\\\"role_id2\\\"],\\\"role_level3\\\":[\\\"role_level\\\"]}\"}]")
+    || isJSONArray("[{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v1.lybChannelChat\",\"relation\":\"{\\\"message\\\":[\\\"msg\\\",\\\"role_id\\\"],\\\"role_id\\\":[\\\"role_id1\\\"],\\\"role_level\\\":[\\\"role_level\\\"]}\"},{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v2.lybChannelChat\",\"relation\":\"{\\\"message\\\":[\\\"msg\\\",\\\"role_id\\\"],\\\"role_id\\\":[\\\"role_id1\\\"],\\\"role_level2\\\":[\\\"role_level\\\"]}\"},{\"es_schema\":\"luoge-dev.lyb_test123\",\"log_schema\":\"com.netease.fuxi.luoge.nsh.model.tables.v2.lybtest\",\"relation\":\"\\\"role_id\\\":[\\\"role_id1\\\",\\\"role_id2\\\"],\\\"role_level3\\\":[\\\"role_level\\\"]}\"}]"));
+
+        System.out.println("luoge-dev.lyb_test123".split("\\.")[0]);
+
+    }
+
+    private static boolean isJSON(String str){
+	    return isJSONObject(str) || isJSONArray(str);
+    }
+
+    private static boolean isJSONObject(String str) {
+        boolean result = false;
+        try {
+            if(!str.trim().equals("")){
+                JSONObject obj= JSONObject.parseObject(str);
+                result = true;
+            }else{
+                result = false;
+            }
+
+        } catch (Exception e) {
+            result=false;
+        }
+        return result;
+    }
+
+    private static boolean isJSONArray(String str) {
+        boolean result = false;
+        try {
+            if(!str.trim().equals("")){
+                JSONArray obj= JSONObject.parseArray(str);
+                result = true;
+            }else{
+                result = false;
+            }
+
+        } catch (Exception e) {
+            result=false;
+        }
+        return result;
     }
 }

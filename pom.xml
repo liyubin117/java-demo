@@ -149,7 +149,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.58</version>
         </dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.avro/avro -->
@@ -159,6 +159,11 @@
 			<version>1.8.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
 
 
 		<dependency>
