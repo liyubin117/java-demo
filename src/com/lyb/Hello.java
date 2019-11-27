@@ -7,7 +7,10 @@ public class Hello{
 	static private int a=1;
 	
 	public static void main(String[] args){
-	    String schema = "com.netease.fuxi.luoge.nsh.model.tables.v1.ChannelChat";
+        testarg("test");
+
+
+        String schema = "com.netease.fuxi.luoge.nsh.model.tables.v1.ChannelChat";
         System.out.println(schema.indexOf("model.tables"));
         System.out.println(schema.indexOf(".",schema.indexOf(".")+1));
 
@@ -54,10 +57,18 @@ public class Hello{
 		String st=scan.nextLine();
 		System.out.println(st);
 
-		
 	}
 	
 	public int geta(){
 		return Hello.a;
 	}
+
+	public static void testarg(String arg){
+
+	    if(true){
+	        arg = "hello";
+        }
+        System.out.println(arg);
+
+    }
 }
