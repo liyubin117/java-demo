@@ -27,7 +27,7 @@ class  Car {
     }
 }
 
-public class SupplierDemo{
+public class MethodRefDemo{
     public static void main(String[] args) {
         //构造器引用，语法是Class::new，或者更一般的Class< T >::new实例
         final Car car = Car.create( Car::new );
