@@ -80,23 +80,58 @@ public class StreamDemo {
     }
 
     @Test
-    public void collect2List(){
+    public void collect2List() {
         // 将Stream转换成容器或Map
         List<String> list = stream.collect(Collectors.toList());
         System.out.println(list);
     }
 
     @Test
-    public void collect2Set(){
+    public void collect2ListOrigin() {
         // 将Stream转换成容器或Map
-         Set<String> set = stream.collect(Collectors.toSet());
+        List<String> list = stream.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        System.out.println(list);
+    }
+
+    @Test
+    public void collect2Set() {
+        // 将Stream转换成容器或Map
+        Set<String> set = stream.collect(Collectors.toSet());
         System.out.println(set);
     }
 
     @Test
-    public void collect2Map(){
+    public void collect2Map() {
         // 将Stream转换成容器或Map
-         Map<String, Integer> map = stream.collect(Collectors.toMap(Function.identity(), String::length));
+        Map<String, Integer> map = stream.collect(Collectors.toMap(Function.identity(), String::length));
         System.out.println(map);
     }
+
+    @Test
+    public void collectJoining1() {
+        System.out.println(stream.collect(Collectors.joining()));
+    }
+
+    @Test
+    public void collectJoining2() {
+        System.out.println(stream.collect(Collectors.joining("---")));
+    }
+
+    @Test
+    public void collectJoining3() {
+        System.out.println(stream.collect(Collectors.joining("-", "{", "}")));
+    }
+
+    //说明stream是流水线式操作，不是简单的语法糖
+    @Test
+    public void streamLogic() {
+        stream
+                .filter(x -> {
+                    System.out.println("filter");
+                    return x.length() > 2;
+                })
+                .limit(1)
+                .forEach(x -> System.out.println(x));
+    }
+
 }
