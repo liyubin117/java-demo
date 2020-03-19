@@ -13,7 +13,7 @@ public class AirfliftDemo {
 
     @Before
     public void setUp(){
-        duration = new Duration(5, TimeUnit.SECONDS);
+        duration = new Duration(1, TimeUnit.MINUTES);
     }
 
     @Test
