@@ -1,5 +1,7 @@
 package com.useful;
 
+import java.util.UUID;
+
 public class SystemDemo {
 
 	public static void main(String[] args) {
@@ -11,6 +13,13 @@ public class SystemDemo {
 		);
 		
 		System.out.print("换行符："+System.getProperty("line.separator"));
+
+		System.out.println(System.currentTimeMillis());
+		System.out.println(System.nanoTime());
+        System.out.println(System.nanoTime());
+
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
 	}
 
 }
