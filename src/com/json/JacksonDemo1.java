@@ -7,11 +7,13 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.pubtest.Person;
 import com.pubtest.Student;
+import org.junit.Test;
 
 public class JacksonDemo1 {
 
@@ -66,6 +68,13 @@ public class JacksonDemo1 {
 		List<Student> list = mapper.readValue(f,
 		        new TypeReference<List<Student>>() {});
 		System.out.println(list.toString());
+	}
+
+	@Test
+	public void test1() throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		User user1 = new User(1, Arrays.asList("a","b"));
+		System.out.println(mapper.writeValueAsString(user1));
 	}
 
 }
