@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -25,17 +26,28 @@ public class FileChannelTest {
 			os=new FileOutputStream(f2,true);
 			
 			inChannel=is.getChannel();
-			MappedByteBuffer buffer=inChannel.map(FileChannel.MapMode.READ_ONLY, 0, f.length() );
-			
-			Charset charset=Charset.forName("UTF8");
-			outChannel =os.getChannel();
-			buffer.clear();
-			outChannel.write(buffer);
-			
-			buffer.flip();
-			CharsetDecoder decoder=charset.newDecoder();
-			CharBuffer charBuffer=decoder.decode(buffer);
-			System.out.println(charBuffer);
+			outChannel=os.getChannel();
+
+//			MappedByteBuffer buffer=inChannel.map(FileChannel.MapMode.READ_ONLY, 0, f.length() );
+//			outChannel =os.getChannel();
+//			buffer.clear();
+//			outChannel.write(buffer);
+
+            ByteBuffer buffer = ByteBuffer.allocate(10);
+            int length=-1;
+            while((length=inChannel.read(buffer))!=-1){
+                //第一次切换，切到读模式
+                buffer.flip();
+                int outlength=0;
+                while((outlength=outChannel.write(buffer))!=0){
+                    System.out.println("写入字节数:" + outlength);
+                }
+                //第二次切换，切到写模式
+                buffer.clear();
+            }
+            //强制刷新到磁盘
+            outChannel.force(true);
+
 		}catch(IOException e){
 			e.printStackTrace();
 		}finally{
