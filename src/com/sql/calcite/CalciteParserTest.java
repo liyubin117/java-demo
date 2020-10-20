@@ -1,4 +1,4 @@
-package com.sql;
+package com.sql.calcite;
 
 import org.apache.calcite.config.CalciteConnectionConfigImpl;
 import org.apache.calcite.config.Lex;
@@ -36,7 +36,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class CalciteParser {
+public class CalciteParserTest {
 
     private SqlParser.Config config = SqlParser.configBuilder()
             .setLex(Lex.MYSQL_ANSI) //使用mysql 语法
