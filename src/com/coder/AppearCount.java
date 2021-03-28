@@ -14,7 +14,7 @@ public class AppearCount {
         char[] chars2 = br.readLine().toLowerCase().toCharArray();
         int count = 0;
         for (int i = 0; i < chars1.length; i++) {
-            if ((chars1[i] >= 65 || chars1[i] < 90) && (chars1[i] == chars2[0])) {
+            if (chars1[i] == chars2[0]) {
                 count++;
             }
         }

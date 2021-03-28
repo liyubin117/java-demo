@@ -13,7 +13,7 @@ public class SystemIO {
 		os.write(bs);
 		
 		InputStream is=System.in;
-		byte[] bs2=new byte[1024];
+		byte[] bs2=new byte[8];
 		/*Scanner scanner=new Scanner(System.in);
 		String str=scanner.nextLine();*/
 		is.read(bs2);
