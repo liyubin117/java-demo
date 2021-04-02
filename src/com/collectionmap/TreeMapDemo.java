@@ -27,8 +27,8 @@ public class TreeMapDemo {
 		map.put("b", "basic");
 		map.put("T", "tree");
 		Map<String, String> hashMap  = new HashMap<>(map);
-		System.out.print("原始映射："); TreeMapDemo.printMap(hashMap);
-		TreeMapDemo.printMap(map);
+		System.out.print("hash map："); TreeMapDemo.printMap(hashMap);
+		System.out.print("tree map："); TreeMapDemo.printMap(map);
 		
 		//不区分大小写
 		Map<String, String> map2  = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
@@ -77,6 +77,8 @@ public class TreeMapDemo {
 		System.out.println(navigatableMap.ceilingEntry("d"));
 		System.out.println(navigatableMap.descendingMap()
 		        .subMap("d", false, "a", true));
+		System.out.println(navigatableMap.pollLastEntry());
+		TreeMapDemo.printMap(navigatableMap);
 	}
 
 }
