@@ -10,8 +10,8 @@ public class SingletonDemo{
 
     @Test
     public void testSingleThread(){
-        Singleton s1=Singleton.getInstance();
-        Singleton s2=Singleton.getInstance();
+        LazySingleton s1=LazySingleton.getInstance();
+        LazySingleton s2=LazySingleton.getInstance();
         System.out.println(s1==s2);
     }
 
@@ -29,21 +29,6 @@ public class SingletonDemo{
         latch.await();
         System.out.println(set.size());
     }
-}
-
-class Singleton{
-	private static Singleton instance;
-	
-	private Singleton(){
-		System.out.println("make Singleton instance");
-	}
-	
-	public static Singleton getInstance(){
-		if(instance==null){
-			instance=new Singleton();
-		}
-		return instance;
-	}
 }
 
 class ConcurrentSingleton implements Comparable{
@@ -73,4 +58,38 @@ class ConcurrentSingleton implements Comparable{
         return -1;
     }
 
+}
+
+//饿汉式
+class EagerSingleton{
+    private static EagerSingleton singleton = new EagerSingleton();
+    private EagerSingleton(){}
+    public static EagerSingleton getInstance(){
+        return singleton;
+    }
+}
+//懒汉式，不适用于多线程
+class LazySingleton{
+    private static LazySingleton singleton;
+    private LazySingleton(){}
+    public static LazySingleton getInstance(){
+        if(singleton==null){
+            singleton = new LazySingleton();
+        }
+        return singleton;
+    }
+}
+//静态内部类
+class StaticSingleton{
+    private static class SingletonFactory{
+        private static StaticSingleton instance = new StaticSingleton();
+    }
+    private StaticSingleton(){}
+    public static StaticSingleton getInstance(){
+        return SingletonFactory.instance;
+    }
+}
+//enum
+enum EnumSingleton{
+    instance;
 }
