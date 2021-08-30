@@ -3,6 +3,9 @@ package com.designmodel;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * 观察者模式
+ */
 class House extends Observable{
 	private String houseName;
 	private double price;
@@ -14,14 +17,14 @@ class House extends Observable{
 		return this.price;
 	}
 	public void setPrice(double d){
+		this.price=d;
 		super.setChanged();  //设置变化点
 		super.notifyObservers(d); //通知观察者价格变为d
-		this.price=d;
 	}
-	public synchronized void setHouseName(String s){
+	public void setHouseName(String s){
+		this.houseName=s;
 		super.setChanged();  //设置变化点
 		super.notifyObservers(s); //通知观察者房屋名字变为d
-		this.houseName=s;
 	}
 	public String toString(){
 		return this.houseName+"房子价格为："+getPrice();
