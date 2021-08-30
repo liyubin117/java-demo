@@ -26,14 +26,16 @@ class PersonSource {
     //1.3判断listener是否为null，如果不为空，则执行监听器中的方法,否则照常调用
     public void run(){
         if(listener!=null){
-            this.listener.dorun(this);
+            Event even=new Event(this);
+            this.listener.dorun(even);
         }
         System.out.println("人具有跑的方法");
     }
     //1.4和1.3一个道理
     public void eat(){
         if(listener!=null){
-            this.listener.doeat(this);
+            Event even=new Event(this);
+            this.listener.doeat(even);
         }
         System.out.println("人具有吃的方法");
     }
@@ -41,20 +43,42 @@ class PersonSource {
 
 //事件监听器
 interface PersonListener{
-    void dorun(PersonSource even);
-    void doeat(PersonSource even);
+    void dorun(Event even);
+    void doeat(Event even);
 
+}
+//事件对象
+class Event{
+    private PersonSource person;
+
+    public Event(PersonSource person) {
+        super();
+        this.person = person;
+    }
+
+    public Event() {
+        super();
+    }
+    //事件对象 -> 事件源
+    public PersonSource getPerson() {
+        return person;
+    }
+
+    public void setPerson(PersonSource person) {
+        this.person = person;
+    }
 }
 //实现监听器接口中的方法
 class MyPersonListener implements PersonListener{
 
     @Override
-    public void dorun(PersonSource even) {
+    public void dorun(Event even) {
+//        PersonSource person = even.getPerson();//拿到事件源
         System.out.println("人在跑之前执行的动作");
     }
 
     @Override
-    public void doeat(PersonSource even) {
+    public void doeat(Event even) {
         System.out.println("人在吃之前执行的动作");
     }
 
