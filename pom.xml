@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.10.2</version>
+			<version>1.14.2</version>
 		</dependency>
 
         <!-- Quartz使用slf4j记录日志，如果要输出日志，必须引入 -->
