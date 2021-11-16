@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class FunctionDemo {
+public class CollectionFunc {
     HashMap<Integer, String> map = new HashMap<>();
 
     @Before
@@ -24,9 +24,9 @@ public class FunctionDemo {
 
     public static void main(String[] args) {
         List<String> list = Arrays.asList("a","b","c");
-        FunctionDemo.mapper(list, t -> System.out.println(t.toUpperCase()));
+        CollectionFunc.mapper(list, t -> System.out.println(t.toUpperCase()));
 
-        System.out.println(FunctionDemo.create(list, t -> t+"test"));
+        System.out.println(CollectionFunc.create(list, t -> t+"test"));
 
         // 使用Lambda表达式实现
         ArrayList<String> al = new ArrayList<>(Arrays.asList("I", "love", "you", "too"));

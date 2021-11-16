@@ -88,4 +88,35 @@ public class TestCase {
 
         System.out.println("es.1.2.3".replace("es.",""));
     }
+
+    @Test
+    public void test() {
+        System.out.println(
+                "set 'source_topic.properties.group.id' = 'new';\n" +
+                        "set 'source_topic.scan.startup.mode' = 'latest-offset';\n" +
+                        "\n" +
+                        "CREATE TABLE sink (\n" +
+                        "    item_id VARCHAR,\n" +
+                        "    item_type varchar\n" +
+                        ") WITH (\n" +
+                        "    'connector' = 'redis',\n" +
+                        "    'host' = '10.122.173.131:6379',\n" +
+                        "    'port' = '6388',\n" +
+                        "    'mode' = 'single',\n" +
+                        "    'db.index' = '0',\n" +
+                        "    'password' = 'sloth1234',\n" +
+                        "    'lookup.cache.type' = 'all',\n" +
+                        "    'lookup.cache.ttl' = '3000',\n" +
+                        "    'primary.key' = 'item_id',\n" +
+                        "    'connector.command' = 'SET'\n" +
+                        ");\n" +
+                        "\n" +
+                        "INSERT INTO sink\n" +
+                        "select\n" +
+                        "  item_id,\n" +
+                        "  item_type\n" +
+                        "from\n" +
+                        "  ht_poc.source_topic;"
+        );
+    }
 }
