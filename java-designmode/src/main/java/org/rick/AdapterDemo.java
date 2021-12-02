@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 //适配器模式
 public class AdapterDemo {

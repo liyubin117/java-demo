@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 //策略模式
 public class StrategyDemo {
 	public static void main(String[] args) {

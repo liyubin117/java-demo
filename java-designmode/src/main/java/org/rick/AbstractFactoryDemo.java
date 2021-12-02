@@ -1,23 +1,28 @@
-package org.rick.designmodel;
+package org.rick;
 //规范与实现分离，降低耦合度，可大大简化重构所需修改的工作量
 //本例体现了抽象工厂的设计模式
 
 //产品
 interface Engine{}
+
 class EngineA implements Engine{
 	public EngineA(){System.out.println("make EngineA");}
 }
+
 class EngineB implements Engine{
 	public EngineB(){System.out.println("make EngineB");}
 }
 
 interface Aircondition{}
+
 class AirconditionA implements Aircondition{
 	public AirconditionA(){System.out.println("make AirconditionA");}
 }
+
 class AirconditionB implements Aircondition{
 	public AirconditionB(){System.out.println("make AirconditionB");}
 }
+
 //工厂
 interface AbstractFactory{
 	Engine createEngine();

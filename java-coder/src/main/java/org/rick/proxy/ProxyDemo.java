@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick.proxy;
 
 //代理模式
 public class ProxyDemo {

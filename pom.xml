@@ -14,6 +14,7 @@
 		<module>java-core</module>
 		<module>java-io</module>
         <module>pojo</module>
+        <module>java-designmode</module>
     </modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 //迭代器模式
 public class IteratorDemo {

@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 public class VisitorDemo {
     public static void main(String[] args) {

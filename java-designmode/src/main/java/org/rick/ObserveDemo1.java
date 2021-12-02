@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 import java.util.Observable;
 import java.util.Observer;

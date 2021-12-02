@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 public class ChainDemo {
 	//创建不同类型的记录器。赋予它们不同的错误级别，并在每个记录器中设置下一个记录器。每个记录器中的下一个记录器代表的是链的一部分。

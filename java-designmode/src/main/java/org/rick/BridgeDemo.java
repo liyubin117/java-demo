@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 //桥接模式
 public class BridgeDemo {

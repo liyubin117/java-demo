@@ -50,8 +50,7 @@ public class LiuDeHuaProxy {
                      * 因此我们可以在invoke方法中使用method.getName()就可以知道当前调用的是代理对象的哪个方法
                      */
                     @Override
-                    public Object invoke(Object proxy, Method method,
-                            Object[] args) throws Throwable {
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         //如果调用的是代理对象的sing方法
                         if (method.getName().equals("sing")) {
                             System.out.println("我是他的经纪人，要找他唱歌得先给十万块钱！！");

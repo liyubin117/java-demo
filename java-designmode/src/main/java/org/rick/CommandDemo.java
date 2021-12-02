@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 import java.util.ArrayList;
 import java.util.List;

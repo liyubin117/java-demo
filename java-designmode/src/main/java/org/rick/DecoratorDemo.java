@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 //装饰者模式
 public class DecoratorDemo {

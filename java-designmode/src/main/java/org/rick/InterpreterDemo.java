@@ -1,4 +1,4 @@
-package org.rick.designmodel;
+package org.rick;
 
 //解释器模式
 public class InterpreterDemo {
