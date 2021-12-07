@@ -4,13 +4,11 @@ package org.rick;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CollectionFunc {
     HashMap<Integer, String> map = new HashMap<>();
@@ -36,8 +34,6 @@ public class CollectionFunc {
             return str;
         });
         System.out.println(al);
-
-
     }
 
     @Test
@@ -80,6 +76,21 @@ public class CollectionFunc {
         }
         // Java8使用Map.getOrDefault()
         System.out.println(map.getOrDefault(4, "NoValue")); // 2
+    }
+
+    @Test
+    public void testCollectors() {
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map1 = new HashMap<>();
+        map1.put("k1", "v1");
+        map1.put("k2", "v2");
+        Map<String, String> map2 = new HashMap<>();
+        map2.put("k1", "value1");
+        map2.put("k2", "value2");
+        list.add(map1);
+        list.add(map2);
+        List<String> result = list.stream().map(x -> x.get("k1")).collect(Collectors.toList());
+        System.out.println(result);
     }
 
     public static <E> List<E> mapper(List<E> list, Consumer<E> function){

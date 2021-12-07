@@ -1,4 +1,4 @@
-package org.rick.math;
+package org.rick.type;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

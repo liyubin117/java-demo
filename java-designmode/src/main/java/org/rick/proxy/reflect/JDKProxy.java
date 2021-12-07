@@ -17,9 +17,11 @@ public class JDKProxy {
         return (CacheService) Proxy.newProxyInstance(classLoader, cacheAdapter.getClass().getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                System.out.println("proxy " + method.getName());
-                return CacheService.class.getMethod(method.getName(), method.getParameterTypes())
+                System.out.println("proxy " + method.getName() + " begin");
+                Object result = CacheService.class.getMethod(method.getName(), method.getParameterTypes())
                         .invoke(cacheAdapter, args);
+                System.out.println("proxy " + method.getName() + " finished");
+                return result;
             }
         });
     }

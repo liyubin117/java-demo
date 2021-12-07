@@ -1,4 +1,4 @@
-package org.rick.math;
+package org.rick.type;
 
 public class DoubleAndFloat {
 

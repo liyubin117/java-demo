@@ -1,4 +1,4 @@
-package org.rick.math;
+package org.rick.type;
 //Java 位运算(移位、位与、或、异或、非）
 public class BitDemo {
 

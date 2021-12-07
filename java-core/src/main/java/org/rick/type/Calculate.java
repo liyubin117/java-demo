@@ -1,4 +1,4 @@
-package org.rick.math;
+package org.rick.type;
 //数据类型
 import static java.lang.Character.isJavaIdentifierStart;
 
