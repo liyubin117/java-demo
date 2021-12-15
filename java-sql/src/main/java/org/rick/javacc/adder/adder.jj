@@ -1,0 +1,58 @@
+/* options部分*/
+options {
+    STATIC = false; //生成非静态类
+    DEBUG_PARSER = true;
+    GRAMMAR_ENCODING = "UTF-8";
+}
+
+/* 分析器类的声明 */
+PARSER_BEGIN(Adder)
+
+package org.rick.javacc.adder;
+
+import java.io.*;
+
+public class Adder {
+    public static void main(String[] args) throws ParseException, TokenMgrError {
+//        InputStream is = new ByteArrayInputStream("11.22 + 2 + 4".getBytes());
+//        Adder parser = new Adder(is);
+        Adder parser = new Adder(new StringReader(args[0]));
+        double result = parser.evaluate();
+        System.out.println(result);
+    }
+}
+
+PARSER_END(Adder)
+
+/* 词法分析器 */
+SKIP : { " " }
+SKIP : { "\n" | "\r" | "\r\n" }
+TOKEN : { < PLUS : "+" > }
+TOKEN : { < NUMBER : <DIGITS> | <DIGITS> "." <DIGITS> > }
+TOKEN : { < #DIGITS : (["0"-"9"])+ > }
+
+/* 语法分析器 */
+double evaluate() throws NumberFormatException :
+{
+    double i;
+    double value;
+}
+{
+    value = primary()
+    (
+        <PLUS>
+        i = primary()
+        {value += i;}
+    )*
+    <EOF>
+    {return value;}
+}
+
+double primary() :
+{
+    Token t;
+}
+{
+    t = <NUMBER>
+    {return Double.parseDouble(t.image);}
+}

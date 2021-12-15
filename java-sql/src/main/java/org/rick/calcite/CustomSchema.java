@@ -1,4 +1,4 @@
-package org.rick.sql.calcite;
+package org.rick.calcite;
 
 import com.google.common.collect.ImmutableMap;
 import org.apache.calcite.schema.Table;

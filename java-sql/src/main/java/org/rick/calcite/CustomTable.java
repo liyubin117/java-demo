@@ -1,4 +1,4 @@
-package org.rick.sql.calcite;
+package org.rick.calcite;
 
 import org.apache.calcite.DataContext;
 import org.apache.calcite.adapter.java.JavaTypeFactory;

@@ -1,4 +1,4 @@
-package org.rick.sql.calcite;
+package org.rick.calcite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

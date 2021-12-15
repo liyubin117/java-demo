@@ -1,4 +1,4 @@
-package org.rick.sql;
+package org.rick;
 
 import java.sql.*;
 

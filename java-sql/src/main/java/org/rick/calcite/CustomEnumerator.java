@@ -1,4 +1,4 @@
-package org.rick.sql.calcite;
+package org.rick.calcite;
 
 import org.apache.calcite.linq4j.Enumerator;
 import org.apache.calcite.util.Source;
