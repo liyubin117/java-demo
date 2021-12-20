@@ -1,9 +1,9 @@
 package org.rick;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import org.junit.Test;
+import scala.Tuple2;
+
+import java.util.*;
 
 public class HashMapDemo {
 	public static void main(String[] args) {
@@ -54,4 +54,50 @@ public class HashMapDemo {
 		}
 		
 	}
+
+	@Test
+	public void testConcurrentModifyException() {
+		Map<String, String> map = new HashMap<>();
+        map.put("a", "one");
+        map.put("b", "123");
+        map.forEach((k,v) -> {
+            if (k.equals("a")) {
+                map.remove("a");
+            }
+        });
+        System.out.println(map);
+	}
+
+	@Test
+	public void testMap() {
+		List<Tuple2<Integer, Integer>> runningJobKey = new ArrayList<>();
+		runningJobKey.add(new Tuple2<>(1, 2));
+		runningJobKey.add(new Tuple2<>(3, 4));
+		runningJobKey.add(new Tuple2<>(5, 6));
+
+		Map<Tuple2<Integer, Integer>, Integer> reportedJobs = new HashMap<>();
+		reportedJobs.put(new Tuple2<>(3, 4), 100);
+		reportedJobs.put(new Tuple2<>(5, 6), 100);
+		reportedJobs.put(new Tuple2<>(7, 8), 100);
+
+		List<Tuple2<Integer, Integer>> removeTasks = new ArrayList<>();
+
+		reportedJobs.forEach((k,v) -> {
+			if (!runningJobKey.contains(k)) {
+				removeTasks.add(k);
+			}
+		});
+		removeTasks.forEach(reportedJobs::remove);
+		System.out.println(removeTasks);
+		System.out.println(reportedJobs);
+	}
 }
+
+//class Tuple2<T, A> {
+//    T k;
+//    A v;
+//    public Tuple2(T k, A v) {
+//        this.k = k;
+//        this.v = v;
+//    }
+//}
