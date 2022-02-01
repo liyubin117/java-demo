@@ -1,4 +1,4 @@
-package org.rick;
+package org.rick.async;
 
 import java.util.concurrent.*;
 
