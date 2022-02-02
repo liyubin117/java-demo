@@ -57,4 +57,40 @@ public class CompletableFutureDemo {
         });
         printThread(cook.join() + "，小明开吃");
     }
+
+    @Test
+    public void test4() {
+        CompletableFuture<String> run = CompletableFuture.supplyAsync(() -> {
+            sleepMillis(2000);
+            printThread("1号公交到了");
+            return "1号公交";
+        }).applyToEither(CompletableFuture.supplyAsync(() -> {
+            sleepMillis(1000);
+            printThread("2号公交到了");
+            return "2号公交";
+        }), (bus) -> bus);
+        printThread(String.format("小明坐上%s", run.join()));
+    }
+
+    @Test
+    public void test5() {
+        CompletableFuture<String> run = CompletableFuture.supplyAsync(() -> {
+            sleepMillis(2000);
+            printThread("1号公交到了");
+            return "1号";
+        }).applyToEither(CompletableFuture.supplyAsync(() -> {
+            sleepMillis(1000);
+            printThread("2号公交到了");
+            return "2号";
+        }), (bus) -> {
+            if (bus.equals("2号")) {
+                throw new RuntimeException("车熄火了...");
+            }
+            return bus;
+        }).exceptionally((exception) -> {
+            printThread(String.format("由于%s，打出租车", exception.getMessage()));
+            return "出租车";
+        });
+        printThread(String.format("小明坐上%s", run.join()));
+    }
 }
