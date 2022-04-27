@@ -13,7 +13,7 @@ public class Adder implements AdderConstants {
         System.out.println(result);
     }
 
-/* 语法分析�? */
+/* 语法分析 */
   final public double evaluate() throws ParseException, NumberFormatException {
     trace_call("evaluate");
     try {
