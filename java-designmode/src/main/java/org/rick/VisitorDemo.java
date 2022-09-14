@@ -15,31 +15,28 @@ interface ComputerPartVisitor {
 }
 
 interface ComputerPart {
-    public void accept(ComputerPartVisitor computerPartVisitor);
+    public default void accept(ComputerPartVisitor computerPartVisitor) {
+        if (this instanceof Computer) {
+            computerPartVisitor.visit((Computer) this);
+        } else if (this instanceof Mouse) {
+            computerPartVisitor.visit((Mouse) this);
+        } else if (this instanceof Keyboard) {
+            computerPartVisitor.visit((Keyboard) this);
+        } else if (this instanceof Monitor) {
+            computerPartVisitor.visit((Monitor) this);
+        } else {
+            throw new RuntimeException("not support to visit such part");
+        }
+    }
 }
 
 class Keyboard  implements ComputerPart {
-
-    @Override
-    public void accept(ComputerPartVisitor computerPartVisitor) {
-        computerPartVisitor.visit(this);
-    }
 }
 
 class Monitor  implements ComputerPart {
-
-    @Override
-    public void accept(ComputerPartVisitor computerPartVisitor) {
-        computerPartVisitor.visit(this);
-    }
 }
 
 class Mouse  implements ComputerPart {
-
-    @Override
-    public void accept(ComputerPartVisitor computerPartVisitor) {
-        computerPartVisitor.visit(this);
-    }
 }
 
 class Computer implements ComputerPart {
@@ -50,11 +47,10 @@ class Computer implements ComputerPart {
         parts = new ComputerPart[] {new Mouse(), new Keyboard(), new Monitor()};
     }
 
-
     @Override
     public void accept(ComputerPartVisitor computerPartVisitor) {
-        for (int i = 0; i < parts.length; i++) {
-            parts[i].accept(computerPartVisitor);
+        for (ComputerPart part : parts) {
+            part.accept(computerPartVisitor);
         }
         computerPartVisitor.visit(this);
     }
