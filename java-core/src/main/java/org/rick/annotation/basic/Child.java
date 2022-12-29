@@ -4,7 +4,7 @@ package org.rick.annotation.basic;
 public class Child extends Person {
 
 	@Override
-	//@Description(author = "liyubin", desc = "Child function annotation")
+	@Description(author = "liyubin", desc = "Child function annotation")
 	public String name() {
 		return super.name();
 	}
