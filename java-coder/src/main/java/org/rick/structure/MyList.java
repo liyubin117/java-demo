@@ -1,6 +1,6 @@
 package org.rick.structure;
 
-public interface List<E> {
+public interface MyList<E> {
 
     boolean add(E e);
 

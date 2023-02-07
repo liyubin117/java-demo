@@ -1,6 +1,6 @@
 package org.rick.structure;
 
-public class LinkedList<E> implements List<E> {
+public class MyLinkedList<E> implements MyList<E> {
 
     transient int size = 0;
 
@@ -8,7 +8,7 @@ public class LinkedList<E> implements List<E> {
 
     transient Node<E> last;
 
-    public LinkedList() {
+    public MyLinkedList() {
     }
 
     void linkFirst(E e) {

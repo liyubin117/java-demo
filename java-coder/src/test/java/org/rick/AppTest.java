@@ -3,8 +3,8 @@ package org.rick;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.rick.structure.LinkedList;
-import org.rick.structure.List;
+import org.rick.structure.MyLinkedList;
+import org.rick.structure.MyList;
 
 /**
  * Unit test for simple App.
@@ -22,7 +22,7 @@ public class AppTest
 
     @Test
     public void testLink() {
-        List<String> list = new LinkedList<>();
+        MyList<String> list = new MyLinkedList<>();
         // 添加元素
         list.add("a");
         list.addFirst("b");
