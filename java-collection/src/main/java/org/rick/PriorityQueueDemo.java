@@ -2,7 +2,12 @@ package org.rick;
 
 import java.util.*;
 
-//优先级队列，原理是堆（完全二叉树中的最小堆以数组形式存储，节点索引i，父节点i/2，左孩子节点i*2-1，右孩子节点i*2+1）
+/**
+ * 优先级队列，原理是堆（完全二叉树中的最小堆以数组形式存储，节点索引i，父节点i/2，左孩子节点i*2-1，右孩子节点i*2+1）
+ * 最小堆 new PriorityQueue()
+ * 最大堆 new PriorityQueue(Collections.reverseOrder())
+ */
+
 public class PriorityQueueDemo {
 
 	public static void main(String[] args) {
@@ -16,8 +21,18 @@ public class PriorityQueueDemo {
 		    System.out.print(pq.poll() + " ");
 		}
 		System.out.println();
-		
-		//模拟任务队列
+
+        Queue<Integer> maxQueue = new PriorityQueue<>(Collections.reverseOrder());
+        maxQueue.offer(10);
+        maxQueue.add(22);
+        maxQueue.addAll(Arrays.asList(new Integer[]{
+                11, 12, 34, 2, 7, 4, 15, 12, 8, 6, 19, 13 }));
+        while(maxQueue.peek()!=null){
+            System.out.print(maxQueue.poll() + " ");
+        }
+        System.out.println();
+
+        //模拟任务队列
 		Queue<Task> tasks = new PriorityQueue<Task>(11, taskComparator);
 		tasks.offer(new Task(20, "写日记"));
 		tasks.offer(new Task(10, "看电视"));

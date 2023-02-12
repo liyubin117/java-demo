@@ -14,10 +14,9 @@ public class TestCase {
 
     @Test
     public void test1(){
-        String str = "jdbc:presto://fuxi-luoge-76:7988;user=hive;";
+        String str = "jdbc:presto://host:7988;user=hive;";
         System.out.println(str.replace(";","?").substring(0,str.length()-1));
     }
-
     @Test
     public void test2(){
         String str = "impala::ball_ods_kudu.ods_itembuy_123";
@@ -101,7 +100,7 @@ public class TestCase {
                         "    item_type varchar\n" +
                         ") WITH (\n" +
                         "    'connector' = 'redis',\n" +
-                        "    'host' = '10.122.173.131:6379',\n" +
+                        "    'host' = 'ip:6379',\n" +
                         "    'port' = '6388',\n" +
                         "    'mode' = 'single',\n" +
                         "    'db.index' = '0',\n" +
@@ -119,5 +118,45 @@ public class TestCase {
                         "from\n" +
                         "  ht_poc.source_topic;"
         );
+    }
+
+    @Test
+    public void test5() {
+        System.out.println(Integer.toBinaryString(7));
+        System.out.println(Integer.toBinaryString(15));
+        System.out.println(Integer.toBinaryString(60));
+        System.out.println(Integer.toBinaryString(70));
+
+        System.out.println((8-1) & 60);
+        System.out.println((16-1) & 60);
+        System.out.println((8-1) & 70);
+        System.out.println((16-1) & 70);
+    }
+
+    @Test
+    public void test6() {
+        System.out.println(7 / 2);
+        System.out.println(7 % 2);
+        System.out.println(7 / 3);
+        System.out.println(7 % 3);
+    }
+
+    @Test
+    public void test7() {
+        long BIG = 0, i = 0;
+        while (BIG < 1 << 30) {
+            BIG = Math.round(Math.pow(3, i));
+            i++;
+        }
+        System.out.println(BIG);
+    }
+
+    @Test
+    public void test8() {
+        System.out.println('0' ^ '1');
+        System.out.println((char)65);
+        System.out.println((int)'A');
+        System.out.println("" + 'A' + 'B');
+        System.out.println('A' + 'B');
     }
 }
