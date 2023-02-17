@@ -24,6 +24,26 @@
             <artifactId>ngdbc</artifactId>
             <version>${hana.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.calcite</groupId>
+            <artifactId>calcite-core</artifactId>
+            <version>1.26.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>3.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>commons-compiler</artifactId>
+            <version>3.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.rick</groupId>
+            <artifactId>pojo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

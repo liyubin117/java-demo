@@ -1,5 +1,7 @@
 package org.rick.coder;
 
+import coder.ListNode;
+
 /**
  * 判断一个链表是否环形链表
  * 快慢指针
@@ -15,26 +17,6 @@ public class CycleListDetermine {
         System.out.println(determine(head));
         third.next = null;
         System.out.println(determine(head));
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) {
-            val = x;
-            next = null;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder builder = new StringBuilder();
-            ListNode cur = this;
-            while (cur != null) {
-                builder.append(cur.val + ",");
-                cur = cur.next;
-            }
-            return builder.toString();
-        }
     }
 
     private static boolean determine(ListNode head) {

@@ -14,6 +14,7 @@ public class BinarySearch {
         assertEquals(5, search(new int[]{-1,0,1,3,5,8,10}, 8));
         assertEquals(3, searchInsert(new int[]{1,2,4,8,16}, 5));
         assertEquals(4, searchInsert(new int[]{1,2,4,8,16}, 16));
+        assertEquals(1, binarySearchPeakElement(new int[]{1,8,3,2,5,4}));
         int[][] arr = new int[3][4];
         arr[0] = new int[]{1,3,5,7};
         arr[1] = new int[]{10,11,16,20};
@@ -49,7 +50,7 @@ public class BinarySearch {
     //二分法，O(logN)
     private static int binarySearchPeakElement(int[] nums) {
         int left = 0, right = nums.length - 1;
-        for (; left < right; ) {
+        while (left < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] > nums[mid + 1]) {
                 right = mid;

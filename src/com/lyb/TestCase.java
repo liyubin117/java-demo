@@ -63,7 +63,7 @@ public class TestCase {
         JSONArray templateArr = JSONArray.parseArray(
                 "[\"es.select_on_index_nsh_template3\",\"es.all_on_cluster_luoge-dev_index_template_yq_alarm\"]"
                 // todo:
-//                    getResultFromRestful("http://10.241.12.67:2333/api/v1" + "/web/users/" + user + "/permissions?type=es", token).second
+//                    getResultFromRestful("http://ip:2333/api/v1" + "/web/users/" + user + "/permissions?type=es", token).second
         );
         Set templateSet = new HashSet<String>();
         templateArr.stream()

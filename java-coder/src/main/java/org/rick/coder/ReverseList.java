@@ -1,6 +1,6 @@
 package org.rick.coder;
 
-import org.rick.coder.CycleListDetermine.ListNode;
+import coder.ListNode;
 
 import java.util.Stack;
 
@@ -50,7 +50,7 @@ public class ReverseList {
         }
         return pre;
     }
-
+    //递归
     private static ListNode reverseList3(ListNode head) {
         ListNode cur = head;
         if (cur == null || cur.next == null) return cur;

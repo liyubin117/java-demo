@@ -1,12 +1,15 @@
 package org.rick.coder;
 
-import org.rick.coder.CycleListDetermine.ListNode;
+import coder.ListNode;
+import coder.TreeNode;
+
 import static org.junit.Assert.assertEquals;
 
 // 递归
 public class Recursion {
     public static void main(String[] args) {
         assertEquals(8, fib(6));
+        assertEquals(8, fibDp(6));
 
         ListNode one = new ListNode(1);
         ListNode two = new ListNode(5);
@@ -22,9 +25,23 @@ public class Recursion {
     }
 
     //509 斐波那契
+    //递归 O(2^N) O(N)
     private static int fib(int n) {
         if (n < 2) return n == 1 ? 1 : 0;
         return fib(n - 1) + fib(n - 2);
+    }
+    //DP O(N) O(1)
+    private static int fibDp(int n) {
+        if (n < 3) {
+            return n < 1 ? 0 : 1;
+        }
+        int pre = 1, cur = 1, result = 0;
+        for (int i = 3; i <= n; i++) {
+            result = pre + cur;
+            pre = cur;
+            cur = result;
+        }
+        return result;
     }
 
     //21 合并两个有序链表
@@ -44,4 +61,16 @@ public class Recursion {
             return l2;
         }
     }
+
+    //100 相同的树
+    private static boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p == null && q == null)
+            return true;
+        if(p == null || q == null)
+            return false;
+        if(p.val != q.val)
+            return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
 }

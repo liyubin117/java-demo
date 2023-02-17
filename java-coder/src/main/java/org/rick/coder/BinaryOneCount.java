@@ -3,23 +3,34 @@ package org.rick.coder;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- 输入整数，输出二进制形式的值及1的个数
+ * 输入整数，输出二进制形式的值及1的个数
  */
 public class BinaryOneCount {
     public static void main(String[] args) throws Exception {
-        // 使用Integer.toBinaryString把输入的整数转换为二进制字符串，然后迭代判断
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String str;
-        while ((str = reader.readLine()) != null) {
-            char [] numChars = Integer.toBinaryString(Integer.parseInt(str)).toCharArray();
-            int countNum = 0;
-            for (int i = 0;i < numChars.length; i++){
-                if (numChars[i] == '1'){
-                    countNum = countNum + 1;
-                }
+        assertEquals(2, useIntegerToBinaryString(9));
+        assertEquals(2, useBitCalc(9));
+    }
+
+    private static int useIntegerToBinaryString(int n) {
+        char[] numChars = Integer.toBinaryString(n).toCharArray();
+        int countNum = 0;
+        for (char numChar : numChars) {
+            if (numChar == '1') {
+                countNum = countNum + 1;
             }
-            System.out.println(new String(numChars) + "\t" + countNum);
         }
+        return countNum;
+    }
+
+    private static int useBitCalc(int n) {
+        int result = 0;
+        while (n != 0) {
+            n = (n - 1) & n;
+            result++;
+        }
+        return result;
     }
 }
