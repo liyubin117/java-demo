@@ -3,6 +3,7 @@ package org.rick.json;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import org.junit.Test;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,6 +15,14 @@ import java.util.Map;
  * @description
  */
 public class FastJsonDemo2 {
+    @Test
+    public void testNull() {
+        JSONObject obj = new JSONObject();
+        obj.put("k", "v");
+        obj.put("k2", null);
+        System.out.println(obj.toJSONString());
+    }
+
     public static void main(String[] args) {
         String jsonStr = "{\"width\":\"M (B)\",\"size\":\"7.5\"}";
 

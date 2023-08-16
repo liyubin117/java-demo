@@ -159,4 +159,13 @@ public class TestCase {
         System.out.println("" + 'A' + 'B');
         System.out.println('A' + 'B');
     }
+
+    @Test
+    public void test12() {
+        System.out.println(String.format("comment '%s'", escapeSingleQuotes("this is 'a' column ")));
+    }
+
+    public static String escapeSingleQuotes(String s) {
+        return s.replace("'", "''");
+    }
 }
