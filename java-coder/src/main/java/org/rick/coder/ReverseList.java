@@ -1,10 +1,8 @@
 package org.rick.coder;
 
-import coder.ListNode;
+import org.rick.structure.ListNode;
 
 import java.util.Stack;
-
-import static org.junit.Assert.assertEquals;
 
 //206 反转链表
 public class ReverseList {

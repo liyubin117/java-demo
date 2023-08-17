@@ -1,6 +1,7 @@
 package org.rick.coder;
 
-import coder.ListNode;
+
+import org.rick.structure.ListNode;
 
 public class LastKnode {
     public static void main(String[] args) {

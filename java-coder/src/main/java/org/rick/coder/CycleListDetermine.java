@@ -1,6 +1,6 @@
 package org.rick.coder;
 
-import coder.ListNode;
+import org.rick.structure.ListNode;
 
 /**
  * 判断一个链表是否环形链表

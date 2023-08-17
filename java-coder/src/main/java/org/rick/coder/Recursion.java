@@ -1,7 +1,7 @@
 package org.rick.coder;
 
-import coder.ListNode;
-import coder.TreeNode;
+import org.rick.structure.ListNode;
+import org.rick.structure.TreeNode;
 
 import static org.junit.Assert.assertEquals;
 

@@ -53,7 +53,7 @@ public class CalciteParserTest {
 
                 if(SqlKind.LESS_THAN.equals(where.getKind())){
                     SqlBasicCall sqlBasicCall=(SqlBasicCall)where;
-                    Arrays.stream(sqlBasicCall.operands)
+                    Arrays.stream(sqlBasicCall.getOperandList().toArray(new SqlNode[0]))
                             .filter(x -> SqlKind.LITERAL.equals(x.getKind()))
                             .forEach(x -> System.out.println("过滤小于literal的值:" + x.toString()));
                 }
@@ -82,7 +82,7 @@ public class CalciteParserTest {
             SqlNode where = sqlSelect.getWhere();
             System.out.println("where的类型：" + where.getKind());
             SqlBasicCall sqlBasicCall=(SqlBasicCall)where;
-            Arrays.stream(sqlBasicCall.operands)
+            Arrays.stream(sqlBasicCall.getOperandList().toArray(new SqlNode[0]))
                     .forEach(x -> System.out.println(x + "\t >>>" + x.getKind().toString()));
 //                    .filter(x -> SqlKind.LITERAL.equals(x.getKind()))
 //                    .forEach(x -> System.out.println("过滤小于literal的值:" + x.toString()));

@@ -35,7 +35,7 @@ public class ResolveColumnName {
         SqlKind kind = field.getKind();
         switch (kind) {
             case AS:
-                SqlNode[] operands_as = ((SqlBasicCall) field).operands;
+                SqlNode[] operands_as = ((SqlBasicCall) field).getOperandList().toArray(new SqlNode[0]);
                 SqlNode left_as = operands_as[0];
                 handleField(left_as, cols);
                 break;
@@ -47,7 +47,7 @@ public class ResolveColumnName {
                 break;
             default:
                 if (field instanceof SqlBasicCall) {
-                    SqlNode[] nodes = ((SqlBasicCall) field).operands;
+                    SqlNode[] nodes = ((SqlBasicCall) field).getOperandList().toArray(new SqlNode[0]);
                     for (int i = 0; i < nodes.length; i++) {
                         handleField(nodes[i], cols);
                     }

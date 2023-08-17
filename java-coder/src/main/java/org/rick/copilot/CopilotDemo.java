@@ -1,5 +1,7 @@
 package org.rick.copilot;
 
+import org.rick.structure.ListNode;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,10 +11,10 @@ import java.util.Map;
  */
 public class CopilotDemo {
     public static void main(String[] args) {
-        ListNode node = new CopilotDemo().new ListNode(1);
-        node.next = new CopilotDemo().new ListNode(2);
-        node.next.next = new CopilotDemo().new ListNode(3);
-        node.next.next.next = new CopilotDemo().new ListNode(4);
+        ListNode node = new ListNode(1);
+        node.next = new ListNode(2);
+        node.next.next = new ListNode(3);
+        node.next.next.next = new ListNode(4);
         printList(node);
         reverse(node);
         printList(node);
@@ -42,15 +44,6 @@ public class CopilotDemo {
             cur.next = pre;
             pre = cur;
             cur = next;
-        }
-    }
-
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
         }
     }
 

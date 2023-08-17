@@ -1,25 +1,10 @@
 package org.rick;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 import org.rick.structure.MyLinkedList;
 import org.rick.structure.MyList;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
-
+public class MyListTest {
     @Test
     public void testLink() {
         MyList<String> list = new MyLinkedList<>();
