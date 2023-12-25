@@ -5,8 +5,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;  
 import java.nio.channels.Selector;  
 import java.nio.channels.ServerSocketChannel;  
-import java.nio.channels.SocketChannel;  
-import java.util.Iterator;  
+import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
   
 /** 
  * NIO服务端 
@@ -63,7 +65,7 @@ public class NIOServer {
   
                     //在这里可以给客户端发送信息哦  
                     //channel.write(ByteBuffer.wrap(new String("向客户端发送了一条信息".getBytes(),"UTF-8").getBytes()));  
-                    channel.write(ByteBuffer.wrap(new String("send a message to client").getBytes()));
+                    channel.write(ByteBuffer.wrap("服务端已收到消息！".getBytes(StandardCharsets.UTF_8)));
                     //在和客户端连接成功之后，为了可以接收到客户端的信息，需要给通道设置读的权限。  
                     channel.register(this.selector, SelectionKey.OP_READ);  
                       
@@ -85,13 +87,14 @@ public class NIOServer {
         // 服务器可读取消息:得到事件发生的Socket通道  
         SocketChannel channel = (SocketChannel) key.channel();  
         // 创建读取的缓冲区  
-        ByteBuffer buffer = ByteBuffer.allocate(10);  
-        channel.read(buffer);  
-        byte[] data = buffer.array();  
-        String msg = new String(data).trim();  
-        System.out.println("服务端收到信息："+msg);  
-        ByteBuffer outBuffer = ByteBuffer.wrap(msg.getBytes());  
-        channel.write(outBuffer);// 将消息回送给客户端  
+        ByteBuffer buffer = ByteBuffer.allocate(10);
+        System.out.print("服务端收到信息：");
+        while (channel.read(buffer) > 0) {
+            buffer.flip();
+            String msg = StandardCharsets.UTF_8.decode(buffer).toString();
+            System.out.print(msg);
+            buffer.clear();
+        }
     }  
       
     /** 
