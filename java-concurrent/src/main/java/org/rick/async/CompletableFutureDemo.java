@@ -2,16 +2,16 @@ package org.rick.async;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.util.concurrent.CompletableFuture;
+
 import static org.rick.Utils.printThread;
 import static org.rick.Utils.sleepMillis;
 
 public class CompletableFutureDemo {
     @Before
     public void setBefore() {
-        printThread("小明进饭店了");
-        printThread("小明点了一份炒饭");
-        printThread("小明在玩游戏");
+        System.out.println("main线程：" + Thread.currentThread().getId());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class CompletableFutureDemo {
     }
 
     @Test
-    public void test2() {
+    public void testThenCompose() {
         CompletableFuture<String> cook = CompletableFuture.supplyAsync(() -> {
             printThread("厨师开始做饭");
             sleepMillis(2000);
@@ -41,7 +41,7 @@ public class CompletableFutureDemo {
     }
 
     @Test
-    public void test3() {
+    public void testThenCombine() {
         CompletableFuture<String> cook = CompletableFuture.supplyAsync(() -> {
             printThread("厨师开始做饭");
             sleepMillis(2000);
@@ -59,7 +59,7 @@ public class CompletableFutureDemo {
     }
 
     @Test
-    public void test4() {
+    public void testApplyToEither() {
         CompletableFuture<String> run = CompletableFuture.supplyAsync(() -> {
             sleepMillis(2000);
             printThread("1号公交到了");
@@ -92,5 +92,80 @@ public class CompletableFutureDemo {
             return "出租车";
         });
         printThread(String.format("小明坐上%s", run.join()));
+    }
+
+    @Test
+    public void testHandle() {
+        CompletableFuture<String> futureB = CompletableFuture.
+                supplyAsync(() -> "执行结果:" + (100 / 0))
+                .thenApply(s -> "apply result:" + s)
+                .handle((s, e) -> {
+                    if (e == null) {
+                        printThread(s);//未执行
+                    } else {
+                        printThread(e.getMessage());//java.lang.ArithmeticException: / by zero
+                    }
+                    return "handle result:" + (s == null ? "500" : s);
+                })
+                .exceptionally(e -> {
+                    printThread("ex:" + e.getMessage()); //未执行
+                    return "futureA result: 100";
+                });
+        printThread(futureB.join());//handle result:500
+
+        CompletableFuture<String> futureA = CompletableFuture.
+                supplyAsync(() -> "执行结果:" + (100 / 0))
+                .thenApply(s -> "apply result:" + s)
+                .exceptionally(e -> {
+                    printThread("ex:" + e.getMessage()); //java.lang.ArithmeticException: / by zero
+                    return "futureA result: 100";
+                })
+                .handle((s, e) -> {
+                    if (e == null) {
+                        printThread(s);//futureA result: 100
+                    } else {
+                        printThread(e.getMessage());//未执行
+                    }
+                    return "handle result:" + (s == null ? "500" : s);
+                });
+        printThread(futureA.join());//handle result:futureA result: 100
+    }
+
+    @Test
+    public void testWhenComplete() {
+        CompletableFuture<String> futureA = CompletableFuture.
+                supplyAsync(() -> "执行结果:" + (100 / 0))
+                .thenApply(s -> "apply result:" + s)
+                .whenComplete((s, e) -> {
+                    if (s != null) {
+                        printThread(s);//未执行
+                    }
+                    if (e == null) {
+                        printThread(s);//未执行
+                    } else {
+                        printThread("ex:" + e.getMessage());//java.lang.ArithmeticException: / by zero
+                    }
+                })
+                .exceptionally(e -> {
+                    printThread(e.getMessage()); //ex:java.lang.ArithmeticException: / by zero
+                    return "futureA result: 100";
+                });
+        printThread(futureA.join());//futureA result: 100
+
+        CompletableFuture<String> futureB = CompletableFuture.
+                supplyAsync(() -> "执行结果:" + (100 / 0))
+                .thenApply(s -> "apply result:" + s)
+                .exceptionally(e -> {
+                    printThread("ex:" + e.getMessage()); //ex:java.lang.ArithmeticException: / by zero
+                    return "futureB result: 100";
+                })
+                .whenComplete((s, e) -> {
+                    if (e == null) {
+                        printThread(s);//futureA result: 100
+                    } else {
+                        printThread(e.getMessage());//未执行
+                    }
+                });
+        printThread(futureB.join());//futureA result: 100
     }
 }

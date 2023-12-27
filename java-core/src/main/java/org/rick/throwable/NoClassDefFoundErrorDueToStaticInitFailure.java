@@ -1,4 +1,4 @@
-package org.rick.exception;
+package org.rick.throwable;
 
 import java.util.ArrayList;
 import java.util.List;
