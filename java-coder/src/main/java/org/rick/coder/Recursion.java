@@ -3,6 +3,9 @@ package org.rick.coder;
 import org.rick.structure.ListNode;
 import org.rick.structure.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 // 递归
@@ -62,7 +65,7 @@ public class Recursion {
         }
     }
 
-    //100 相同的树
+    //100 相同的树，解法一：暴力递归
     private static boolean isSameTree(TreeNode p, TreeNode q) {
         if(p == null && q == null)
             return true;
@@ -71,6 +74,26 @@ public class Recursion {
         if(p.val != q.val)
             return false;
         return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+    //100 相同的树，解法二：中序遍历加权重
+    private boolean isSameTree2(TreeNode p, TreeNode q) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        traverse(p, list1);
+        traverse(q, list2);
+        return list1.equals(list2);
+    }
+
+    private void traverse(TreeNode root, List<Integer> list) {
+        if (root == null) {
+            list.add(null);
+            return;
+        }
+        if (root.left != null) root.left.val *= 100;
+        if (root.right != null) root.right.val *= 10;
+        traverse(root.left, list);
+        list.add(root.val);
+        traverse(root.right, list);
     }
 
 }

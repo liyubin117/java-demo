@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import static org.rick.Utils.printThread;
 import static org.rick.Utils.sleepMillis;
@@ -167,5 +168,12 @@ public class CompletableFutureDemo {
                     }
                 });
         printThread(futureB.join());//futureA result: 100
+    }
+
+    @Test
+    public void testCompleteExceptionally() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> result = new CompletableFuture<>();
+        result.completeExceptionally(new Throwable("异常"));
+        result.get();
     }
 }

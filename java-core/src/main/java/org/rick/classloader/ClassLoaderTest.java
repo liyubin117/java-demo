@@ -21,6 +21,9 @@ public class ClassLoaderTest {
         System.out.println(o2.getClass().getClassLoader().getParent());
         Assertions.assertNotSame(o.getClass(), o2.getClass());
         Assertions.assertNotSame(o, o2);
+
+        Object o3 = new MySubClassLoader().loadClass("org.rick.classloader.ClassLoaderTest").newInstance();;
+        Assertions.assertNotSame(o, o3);
     }
 
     @Test
