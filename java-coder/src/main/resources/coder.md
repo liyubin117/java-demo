@@ -48,15 +48,15 @@ jdk提供了方法：Arrays.binarySearch(T[] arr, T)
 平方问题，注意二分比较时可能出现超过int型的情况，比较时要转long
 ```
 private static int search(int[] nums, int target) {
-int l = 0, r = nums.length - 1;
-while (r >= l) {
-int mid = l + (r - l) / 2;
-if (nums[mid] == target) return mid;
-if (nums[mid] < target) l = mid + 1;
-else r = mid - 1;
-}
-return -1;
-}
+    int l = 0, r = nums.length - 1;
+    while (r >= l) {
+        int mid = l + (r - l) / 2;
+        if (nums[mid] == target) return mid;
+        if (nums[mid] < target) l = mid + 1;
+        else r = mid - 1;
+    }
+    return -1;
+    }
 ```
 ### 双指针
 1. 普通双指针：同向移动 O(N^2)
