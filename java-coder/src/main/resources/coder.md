@@ -9,7 +9,7 @@ a * b 二维数组， [x][y]元素对应的一维数组索引是bx+y
 
 ### 滑动窗口
 
-常用于数组连续子串问题 209 1456
+特殊的双指针，常用于数组连续子串问题 209 1456
 
 滑动窗口的头是i，尾是j，新窗口：不滑动的时候是加arr[j]，滑动后是减arr[i]加arr[j]。
 
@@ -202,3 +202,44 @@ m大于等于3，小于等于14，即在蔡勒公式中，某年的1,2月份要�
 * Character.isLetter() 是否是字母
 * char String.charAt() 某索引位置的字符
 * String.join(delimiter, elements) 使用指定分隔符拼接
+
+### 解题思路记录
+#### 数组
+1. 27 移除元素 easy 快慢指针，快指针指向要保留的元素值，慢指针指向更新后的数组的索引
+2. 977 有序数组的平方 easy 双指针，选较大的那个值逆序放到结果集并移到指针
+3. 209 长度最小的子数组 middle 滑动窗口，注意j是窗口的终止位置
+4. 59 螺旋矩阵2 middle 边界是left right top bottom，循环到n*n次赋值结束
+```
+public int[][] generateMatrix(int n) {
+        int left = 0, right = n-1, top = 0, bottom = n-1;
+        int count = 1, target = n * n;
+        int[][] res = new int[n][n];
+        //for循环中变量定义成i或j的细节：按照通常的思维，i代表行，j代表列
+        //这样，就可以很容易区分出来变化的量应该放在[][]的第一个还是第二个
+        //对于变量的边界怎么定义：
+            //从左向右填充：填充的列肯定在[left,right]区间
+            //从上向下填充：填充的行肯定在[top,bottom]区间
+            //从右向左填充：填充的列肯定在[right,left]区间
+            //从下向上填充：填充的行肯定在[bootom,top]区间
+        //通过上面的总结会发现边界的起始和结束与方向是对应的
+        while(count <= target){
+            //从左到右填充，相当于缩小上边界
+            for(int j = left; j <= right; j++) res[top][j] = count++;
+            //缩小上边界
+            top++;
+            //从上向下填充，相当于缩小右边界
+            for(int i = top; i <=bottom; i++) res[i][right] = count++;
+            //缩小右边界
+            right--;
+            //从右向左填充，相当于缩小下边界
+            for(int j = right; j >= left; j--) res[bottom][j] = count++;
+            //缩小下边界
+            bottom--;
+            //从下向上填充，相当于缩小左边界
+            for(int i = bottom; i >= top; i--) res[i][left] = count++;
+            //缩小左边界
+            left++;
+        }
+        return res;
+}
+```
