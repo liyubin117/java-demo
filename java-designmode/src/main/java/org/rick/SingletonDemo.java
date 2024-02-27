@@ -1,5 +1,6 @@
 package org.rick;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -27,7 +28,7 @@ public class SingletonDemo{
             }).start();
         }
         latch.await();
-        System.out.println(set.size());
+        Assert.assertEquals(1, set.size());
     }
 }
 
@@ -38,7 +39,7 @@ class ConcurrentSingleton implements Comparable{
         System.out.println("make Concurrent Singleton instance");
     }
     public static ConcurrentSingleton getInstance(){
-        System.out.println(Thread.currentThread());
+//        System.out.println(Thread.currentThread());
         //DCL: double check lock
         if(INSATNCE==null){
             synchronized (ConcurrentSingleton.class){

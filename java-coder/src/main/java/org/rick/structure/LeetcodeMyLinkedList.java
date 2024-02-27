@@ -1,11 +1,8 @@
 package org.rick.structure;
 
-public class MyLinkedList {
-    private final ListNode head;
+public class LeetcodeMyLinkedList {
     private static final ListNode DUMMY_HEAD = new ListNode(-100);
-    public MyLinkedList(ListNode head) {
-        this.head = head;
-        DUMMY_HEAD.next = this.head;
+    public LeetcodeMyLinkedList(ListNode head) {
     }
 
     public int get(int index) {
@@ -18,7 +15,7 @@ public class MyLinkedList {
 
     public void addAtHead(int val) {
         ListNode addedNode = new ListNode(val);
-        addedNode.next = head;
+        addedNode.next = DUMMY_HEAD.next;
         DUMMY_HEAD.next = addedNode;
     }
 
