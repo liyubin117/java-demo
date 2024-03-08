@@ -188,10 +188,16 @@ m大于等于3，小于等于14，即在蔡勒公式中，某年的1,2月份要�
 ### 排序
 归并排序 O(logN)
 
+### 字符串匹配
+文本串与模式串是否匹配
+1. 暴力破解法 O(M*N)
+2. KMP算法
+
 ### 常用方法
 * Arrays.sort() 直接对原数组排序，无返回值，归并排序
 * Arrays.binarySearch() 二分查找
 * Arrays.fill(int[], int) 给数组的每个位置赋值指定值
+* Arrays.asList(...) 将一些不定长入参转换成List
 * T[] Arrays.copyOfRange(T[], from, to) 返回一个原数组从包含from到不包含to的数组
 * Integer.toBinaryString()
 * Integer.bitCount() 二进制1的数量
@@ -202,3 +208,4 @@ m大于等于3，小于等于14，即在蔡勒公式中，某年的1,2月份要�
 * Character.isLetter() 是否是字母
 * char String.charAt() 某索引位置的字符
 * String.join(delimiter, elements) 使用指定分隔符拼接e
+* String实例方法 char[] toCharArray() 转换成char数组
