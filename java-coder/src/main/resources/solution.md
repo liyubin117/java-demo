@@ -1,23 +1,23 @@
-### 解题思路记录
-
-#### 数组
-1. 27 移除元素 easy 快慢指针，快指针指向要保留的元素值，慢指针指向删除元素后的数组的索引。快指针是读指针，慢指针是写指针
+# 数组
+## 27 移除元素 easy
+快慢指针，快指针指向要保留的元素值，慢指针指向删除元素后的数组的索引。快指针是读指针，慢指针是写指针
 ```
     public int removeElement(int[] nums, int val) {
         //双指针
         int fast = 0, slow = 0;
         while (fast < nums.length) {
             if (nums[fast] != val) {
-                nums[slow] = nums[fast];
-                slow++;
+                nums[slow++] = nums[fast];
             }
             fast++;
         }
         return slow;
     }
 ```
-2. 977 有序数组的平方 easy 双指针，选较大的那个值逆序放到结果集并移动指针
-3. 209 长度最小的子数组 middle 滑动窗口，注意j是窗口的终止位置
+## 977 有序数组的平方 easy 
+双指针，选较大的那个值逆序放到结果集并移动指针 
+## 209 长度最小的子数组 middle 
+滑动窗口，注意j是窗口的终止位置
 ```
     public int minSubArrayLen(int target, int[] nums) {
         //滑动窗口
@@ -33,7 +33,8 @@
         return result;
     }
 ```
-4. 59 螺旋矩阵2 middle 边界是left right top bottom，循环到n*n次赋值结束
+## 59 螺旋矩阵2 middle 
+边界是left right top bottom，循环到n*n次赋值结束
 ```
     public int[][] generateMatrix(int n) {
             int left = 0, right = n-1, top = 0, bottom = n-1;
@@ -68,7 +69,8 @@
             return res;
     }
 ```
-5. 15 三数之和且不可出现重复三元组 middle 先排序，固定一个点i后双指针left/right，再移动这个点，要注意去重
+## 15 三数之和且不可出现重复三元组 middle 
+先排序，固定一个点i后双指针left/right，再移动这个点，要注意去重
 ```
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
@@ -93,7 +95,8 @@
         return result;
     }
 ```
-6. 18 四数之和 middle 在三数之和基础上多了一层for循环，注意有一级剪枝/去重，二级剪枝/去重，且不能过早return结果，剪枝后break即可
+## 18 四数之和 middle 
+在三数之和基础上多了一层for循环，注意有一级剪枝/去重，二级剪枝/去重，且不能过早return结果，剪枝后break即可
 ```
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<>();
@@ -123,8 +126,9 @@
     }
 ```
 
-#### 链表
-1. LCR 136 删除链表的节点 easy 虚拟头节点next指针指向head节点，即可使用统一的方式遍历删除指定节点
+# 链表
+## LCR 136 删除链表的节点 easy 
+虚拟头节点next指针指向head节点，即可使用统一的方式遍历删除指定节点
 ```
     public ListNode deleteNode(ListNode head, int val) {
         //虚拟头节点
@@ -140,8 +144,9 @@
         return dummyHead.next;
     }
 ```
-2. 707 设计链表 middle 
-3. 19 删除链表倒数第N个节点 快慢指针 构建dummyHead虚拟头节点，快慢指针都指向该dummyHead，先让快指针跑N个节点，慢指针再开始跑，直到快指针到null，此时慢指针指向的就是待删除节点的前一个节点，再让慢指针next指向next.next，再返回虚拟头节点next
+## 707 设计链表 middle 
+## 19 删除链表倒数第N个节点
+快慢指针 构建dummyHead虚拟头节点，快慢指针都指向该dummyHead，先让快指针跑N个节点，慢指针再开始跑，直到快指针到null，此时慢指针指向的就是待删除节点的前一个节点，再让慢指针next指向next.next，再返回虚拟头节点next
 ```
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummyNode = new ListNode(0);
@@ -165,7 +170,7 @@
         return dummyNode.next;
     }
 ```
-4. 206 反转链表 easy
+## 206 反转链表 easy
 ```
     public ListNode reverseList(ListNode head) {
         ListNode cur = head, pre = null;
@@ -178,7 +183,8 @@
         return pre;
     }
 ```
-5. 143 重排链表 middle 使用线性表支持下标的特性，但这个的空间复杂度是O(N)，还可使用寻找链表中点 + 链表逆序 + 合并链表的方式，空间复杂度O(1)
+## 143 重排链表 middle 
+使用线性表支持下标的特性，但这个的空间复杂度是O(N)，还可使用寻找链表中点 + 链表逆序 + 合并链表的方式，空间复杂度O(1)
 ```
     public void reorderList(ListNode head) {
         List<ListNode> list = new ArrayList<>();
@@ -198,14 +204,16 @@
         list.get(l).next = null; //此时将实际上的最后一个节点指向null，否则会cycle
     }
 ```
-6. 237 删除链表中的节点 middle 由于只给定了要删除的节点node，不能使用遍历的方法，而是将node的值改为下一个节点，再将node下一个节点指向下下一个节点即可
+## 237 删除链表中的节点 middle 
+由于只给定了要删除的节点node，不能使用遍历的方法，而是将node的值改为下一个节点，再将node下一个节点指向下下一个节点即可
 ```
     public void deleteNode(ListNode node) {
         node.val = node.next.val;
         node.next = node.next.next;
     }
 ```
-7. 382 链表随机节点 middle 使用线性表
+## 382 链表随机节点 middle
+使用线性表
 ```
 class Solution {
     List<ListNode> list = new ArrayList<>();
@@ -224,7 +232,8 @@ class Solution {
     }
 }
 ```
-8. 160 相交链表 easy 使用哈希集合寻找相交的起始节点
+## 160 相交链表 easy 
+使用哈希集合寻找相交的起始节点
 ```
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         Set<ListNode> set = new HashSet<>();
@@ -241,9 +250,10 @@ class Solution {
     }
 ```
 
-#### 哈希表
+# 哈希表
 常用于解决多个集合间是否有出现过的元素，结构可以有数组、set、map，当哈希值可控，较少时使用数组，较多时使用set；哈希值不可控时使用map
-1. 242 有效的字母异位词 easy 哈希值是固定的即26个字母，构建int[26]，字符串的每个元素-'a'即可作为数组索引，遍历第一个字符串加值，第二个字符串减值，若最终都为0则说明true
+## 242 有效的字母异位词 easy 
+哈希值是固定的即26个字母，构建int[26]，字符串的每个元素-'a'即可作为数组索引，遍历第一个字符串加值，第二个字符串减值，若最终都为0则说明true
 ```
     public boolean isAnagram(String s, String t) {
         int[] hash = new int[26];
@@ -259,7 +269,8 @@ class Solution {
         return true;
     }
 ```
-2. 349 两个数组的交集 easy 由于值最大是1000，定义哈希数组int[1001]，一个写，一个读，找到大于0的值，其索引即交集元素
+## 349 两个数组的交集 easy 
+由于值最大是1000，定义哈希数组int[1001]，一个写，一个读，找到大于0的值，其索引即交集元素
 ```
     public int[] intersection(int[] nums1, int[] nums2) {
         int hash[] = new int[1001];
@@ -277,7 +288,8 @@ class Solution {
         return results;
     }
 ```
-3. 454 四数相加 middle 由于哈希值不可控，使用map结构。两个数组遍历后写入hash，另外两个数组遍历后找-key并将count加上所得的map值
+## 454 四数相加 middle 
+由于哈希值不可控，使用map结构。两个数组遍历后写入hash，另外两个数组遍历后找-key并将count加上所得的map值
 ```
     public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
         Map<Integer, Integer> hash = new HashMap<>();
@@ -295,8 +307,10 @@ class Solution {
         return count;
     }
 ```
-#### 字符串
-1. 344 反转字符串 easy 双指针
+
+# 字符串
+## 344 反转字符串 easy 
+双指针
 ```
     public void reverseString(char[] s) {
         int left = 0, right = s.length - 1;
@@ -309,7 +323,8 @@ class Solution {
         }
     }
 ```
-2. 541 反转字符串2 easy 注意遍历时是2k递增的，每次处理时要判断end索引值是否够k个元素，若不是则直接取最后一个元素
+## 541 反转字符串2 easy 
+注意遍历时是2k递增的，每次处理时要判断end索引值是否够k个元素，若不是则直接取最后一个元素
 ```
     public String reverseStr(String s, int k) {
         char[] arr = s.toCharArray();
@@ -327,7 +342,8 @@ class Solution {
         return new String(arr);
     }
 ```
-3. 151 反转字符串里的单词 middle 比较简单的做法是对字符串进行trim split转换后再倒序添加到新的字符串，但空间复杂度高。还可以用双指针，1.去除首尾以及中间多余空格 2.反转整个字符串 3.反转各个单词
+## 151 反转字符串里的单词 middle 
+比较简单的做法是对字符串进行trim split转换后再倒序添加到新的字符串，但空间复杂度高。还可以用双指针，1.去除首尾以及中间多余空格 2.反转整个字符串 3.反转各个单词
 ```
 //简单的做法，使用java内置方法
     public String reverseWords(String s) {
@@ -396,5 +412,138 @@ class Solution {
             start = end + 1;
             end = start + 1;
         }
+    }
+```
+## 459 重复的子字符串 easy
+可以用kmp算法，但比较复杂，直接归纳出特性然后判断
+```
+    public boolean repeatedSubstringPattern(String s) {
+        return (s + s).indexOf(s, 1) != s.length();
+    }
+```
+
+# 栈
+先进后出，擅长相邻元素的消除
+## 232 用两个栈实现队列 easy
+``` 
+    class MyQueue {
+        Deque<Integer> inStack;
+        Deque<Integer> outStack;
+    
+        public MyQueue() {
+            inStack = new ArrayDeque<>();
+            outStack = new ArrayDeque<>();
+        }
+        
+        public void push(int x) {
+            inStack.push(x);
+        }
+        
+        public int pop() {
+            if (outStack.isEmpty()) {
+                in2Out();
+            }
+            return outStack.pop();
+        }
+        
+        public int peek() {
+            if (outStack.isEmpty()) {
+                in2Out();
+            }
+            return outStack.peek();
+        }
+        
+        public boolean empty() {
+            return inStack.isEmpty() && outStack.isEmpty();
+        }
+    
+        private void in2Out() {
+            while (!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
+            }
+        }
+    }
+```
+## 225 用一个队列模拟栈 easy
+```
+    class MyStack {
+        Queue<Integer> queue;
+    
+        public MyStack() {
+            queue = new ArrayDeque<>();
+        }
+        
+        public void push(int x) {
+            queue.offer(x);
+            int size = queue.size();
+            while (--size > 0) {
+                queue.offer(queue.poll());
+            }
+        }
+        
+        public int pop() {
+            return queue.poll();
+        }
+        
+        public int top() {
+            return queue.peek();
+        }
+        
+        public boolean empty() {
+            return queue.isEmpty();
+        }
+    }
+```
+## 20 有效的括号 easy
+```
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (Character c : s.toCharArray()) {
+            if (c.equals('(') || c.equals('[') || c.equals('{')) stack.push(c);
+            else {
+                if (stack.isEmpty()) return false;
+                Character top = stack.pop();
+                if (c.equals(')') && !top.equals('(')) return false;
+                if (c.equals(']') && !top.equals('[')) return false;
+                if (c.equals('}') && !top.equals('{')) return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+```
+## 1047 删除字符串中的所有相邻重复项 easy
+```
+    public String removeDuplicates(String s) {
+        Deque<Character> stack = new ArrayDeque<>();
+        String result = "";
+        for (Character c : s.toCharArray()) {
+                if (!stack.isEmpty() && stack.peek().equals(c)) stack.pop();
+                else stack.push(c);
+        }
+        while (!stack.isEmpty()) {
+            result += stack.removeLast();
+        }
+        return result;
+    }
+```
+## 150 逆波兰表达式 middle
+即后缀表达式，二叉树的后序遍历
+```
+    public int evalRPN(String[] tokens) {
+        Deque<String> stack = new ArrayDeque<>();
+        Map<String, BiFunction<Integer, Integer, Integer>> map = new HashMap<>();
+        map.put("+", (x, y) -> x + y);
+        map.put("-", (x, y) -> x - y);
+        map.put("*", (x, y) -> x * y);
+        map.put("/", (x, y) -> x / y);
+        for (String token : tokens) {
+            if (!map.containsKey(token)) stack.push(token);
+            else {
+                Integer y = Integer.valueOf(stack.pop());
+                Integer x = Integer.valueOf(stack.pop());
+                stack.push(String.valueOf(map.get(token).apply(x, y)));
+            }
+        }
+        return Integer.valueOf(stack.pop());
     }
 ```
