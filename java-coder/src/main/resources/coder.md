@@ -7,6 +7,9 @@ a * b 二维数组， [x][y]元素对应的一维数组索引是bx+y
 
 一维索引是m，则对应的x是m/b，y是m%b
 
+### 二叉树
+数组存储时，i的左孩子是i*2+1，右孩子是i*2+2，父节点是(i-1)/2
+
 ### 滑动窗口
 
 特殊的双指针，常用于数组连续子串问题 209 1456
@@ -209,3 +212,8 @@ m大于等于3，小于等于14，即在蔡勒公式中，某年的1,2月份要�
 * char String.charAt() 某索引位置的字符
 * String.join(delimiter, elements) 使用指定分隔符拼接e
 * String实例方法 char[] toCharArray() 转换成char数组
+
+### 常用java类
+* 栈 Stack ArrayDeque
+* 最小堆 PriorityQueue
+* 双端队列 LinkedList

@@ -17,20 +17,18 @@
 ## 977 有序数组的平方 easy 
 双指针，选较大的那个值逆序放到结果集并移动指针 
 ## 209 长度最小的子数组 middle 
-滑动窗口，注意j是窗口的终止位置
+滑动窗口，注意j是窗口的终止位置。具体：每一轮迭代，将 nums[end] 加到 sum ，如果 sum >= s ，则更新子数组的最小长度（此时子数组的长度是 end−start+1），然后将 nums[start] 从 sum 中减去并将 start 右移，直到 sum<s，在此过程中同样更新子数组的最小长度。在每一轮迭代的最后，将 end 右移。
 ```
     public int minSubArrayLen(int target, int[] nums) {
-        //滑动窗口
-        int result = Integer.MAX_VALUE, sum = 0, i = 0;
-        for (int j = 0; j < nums.length; j++) {
+        int i = 0, j = 0, sum = 0, result = Integer.MAX_VALUE;
+        for(; j < nums.length; j++) {
             sum += nums[j];
             while (sum >= target) {
                 result = Math.min(result, j - i + 1);
                 sum -= nums[i++];
             }
         }
-        result = result == Integer.MAX_VALUE ? 0 : result;
-        return result;
+        return result == Integer.MAX_VALUE ? 0 : result;
     }
 ```
 ## 59 螺旋矩阵2 middle 
@@ -422,7 +420,7 @@ class Solution {
     }
 ```
 
-# 栈
+# 栈和队列
 先进后出，擅长相邻元素的消除
 ## 232 用两个栈实现队列 easy
 ``` 
@@ -545,5 +543,48 @@ class Solution {
             }
         }
         return Integer.valueOf(stack.pop());
+    }
+```
+## 239 滑动窗口最大值 hard
+使用优先级队列最大堆可以解决，元素是数组值、下标结构，堆顶元素即为当前堆的最大值，先初始化第一个窗口的值，再加入新的值到队列，循环判断当前堆顶元素这是否在窗口中，在则直接返回，不在则删除堆顶元素。其实还能用双端队列，但比较难理解
+```
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        Queue<int[]> queue = new PriorityQueue<>((p1, p2) -> p1[0] == p2[0] ? p2[1] - p1[1] : p2[0] - p1[0]);
+        int[] res = new int[nums.length - k + 1];
+        int index = 0;
+        for (int i = 0; i < k; i++) {
+            queue.offer(new int[]{nums[i], i});
+        }
+        res[index] = queue.peek()[0];
+        for (int i = k; i < nums.length; i++) {
+            queue.offer(new int[]{nums[i], i});
+            while (queue.peek()[1] < i - k + 1) queue.poll();
+            res[++index] = Math.max(nums[i], queue.peek()[0]);
+        }
+        return res;
+    }
+```
+## 347 前k个高频元素 middle
+使用最小堆解决，元素是一个Map.Entry，键是数组值，值是出现次数
+```
+    public int[] topKFrequent(int[] nums, int k) {
+        Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((p1, p2) -> p1.getValue() - p2.getValue());
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] res = new int[k];
+        int index = 0;
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (queue.size() < k) queue.offer(entry);
+            else if (entry.getValue() > queue.peek().getValue()) {
+                queue.poll();
+                queue.offer(entry);
+            }
+        }
+        for (int i = 0; i < k; i++) {
+            res[index++] = queue.poll().getKey();
+        }
+        return res;
     }
 ```
