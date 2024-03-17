@@ -588,3 +588,154 @@ class Solution {
         return res;
     }
 ```
+# 递归
+## 144 二叉树的前序遍历 easy
+```
+    //递归 中左右
+    class Solution {
+        public List<Integer> preorderTraversal(TreeNode root) {
+            List<Integer> result = new ArrayList<>();
+            recurse(root, result);
+            return result;
+        }
+    
+        private void recurse(TreeNode cur, List<Integer> result) {
+            if (cur == null) return;
+            result.add(cur.val);
+            recurse(cur.left, result);
+            recurse(cur.right, result);
+        }
+    }
+    //迭代 中右左，因为栈是先进后出
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node;
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            if (node != null) result.add(node.val);
+            else continue;
+            stack.push(node.right);
+            stack.push(node.left);
+        }
+        return result;
+    }
+```
+## 145 二叉树的前序遍历 easy
+若用迭代栈，后序遍历是先中左右再双指针进行翻转
+```
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node;
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            node = stack.pop();
+            if (node != null) result.add(node.val);
+            else continue;
+            stack.push(node.left);
+            stack.push(node.right);
+        }
+        int left = 0, right = result.size() - 1;
+        while (left <= right) {
+            int temp = result.get(left);
+            result.set(left, result.get(right));
+            result.set(right, temp);
+            left++;
+            right--;
+        }
+        return result;
+    }
+```
+## 95 二叉树的中序遍历 easy
+若用迭代，循环迭代左侧节点入栈，直到无左侧节点时将当前节点定位到栈的顶端元素即父节点，将其出栈，再将当前节点定位到右孩子节点。直到栈无元素或当前节点为空
+```
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root;
+        while (cur != null || !stack.isEmpty()){
+           if (cur != null){
+               stack.push(cur);
+               cur = cur.left;
+           }else{
+               cur = stack.pop();
+               result.add(cur.val);
+               cur = cur.right;
+           }
+        }
+        return result;
+    }
+```
+## 102 二叉树的层序遍历 middle
+可用递归和迭代队列两种方式实现BFS，递归更容易理解
+```
+    class Solution {
+        private List<List<Integer>> resList = new ArrayList<List<Integer>>();
+    
+        public List<List<Integer>> levelOrder(TreeNode root) {
+            recurse(root,0);
+            //checkFun02(root);
+            return resList;
+        }
+    
+        //BFS--递归方式
+        private void recurse(TreeNode root, Integer deep) {
+            if (root == null) return;
+            deep++;
+            if (res.size() < deep) {
+                res.add(new ArrayList<Integer>());
+            }
+            res.get(deep - 1).add(root.val);
+            recurse(root.left, deep);
+            recurse(root.right, deep);
+        }
+    
+        //BFS--迭代方式--借助队列
+        public void checkFun02(TreeNode node) {
+            if (node == null) return;
+            Queue<TreeNode> que = new LinkedList<TreeNode>();
+            que.offer(node);
+    
+            while (!que.isEmpty()) {
+                List<Integer> itemList = new ArrayList<Integer>();
+                int len = que.size();
+    
+                while (len > 0) {
+                    TreeNode tmpNode = que.poll();
+                    itemList.add(tmpNode.val);
+    
+                    if (tmpNode.left != null) que.offer(tmpNode.left);
+                    if (tmpNode.right != null) que.offer(tmpNode.right);
+                    len--;
+                }
+    
+                resList.add(itemList);
+            }
+        }
+    }
+```
+
+# 模拟
+## 2899 上一个遍历的整数 easy
+```
+    public List<Integer> lastVisitedIntegers(int[] nums) {
+        List<Integer> seen = new ArrayList<>(), ans = new ArrayList<>();
+        int index = 1;
+        boolean flag = true;
+        for (int num : nums) {
+            if (num != -1) {
+                seen.add(num);
+                flag = false;
+                index = 1;
+            } else {
+                if (flag) index++;
+                int pos = seen.size() - index;
+                ans.add(pos >= 0 ? seen.get(pos) : -1);
+                flag = true;
+            }
+        }
+        return ans;
+    }
+```
