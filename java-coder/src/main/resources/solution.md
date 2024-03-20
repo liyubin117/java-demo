@@ -716,6 +716,223 @@ class Solution {
         }
     }
 ```
+## 226 翻转二叉树 easy
+使用前序遍历或后序遍历比较容易。若用中序遍历，recurse(left) swap(node) recurse(left) 
+```
+    public TreeNode invertTree(TreeNode root) {
+        recurse(root);
+        return root;
+    }
+
+    private void recurse(TreeNode node) {
+        if (node == null) return;
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+        recurse(node.left);
+        recurse(node.right);
+    }
+```
+## 101 对称二叉树 easy
+只能使用后序遍历，需要先收集孩子的信息再向上一层返回。若外侧、内侧都对应相同则是对称的
+```
+    public boolean isSymmetric(TreeNode root) {
+        return recurse(root.left, root.right);
+    }
+    private boolean recurse(TreeNode left, TreeNode right) {
+        if (left == null && right != null) return false;
+        if (left != null && right == null) return false;
+        if (left == null && right == null) return true;
+        if (left.val != right.val) return false;
+        boolean outer = recurse(left.left, right.right);
+        boolean inner = recurse(left.right, right.left);
+        if (outer && inner) return true;
+        else return false;
+    }
+```
+## 104 二叉树的最大深度 easy
+后序遍历，找出左右孩子的较大高度+1后即为该节点的高度，根节点的高度是这个二叉树的最大深度。
+```
+    class Solution {
+        int result = 0;
+        public int maxDepth(TreeNode root) {
+            if (root == null) return 0;
+            int leftDepth = maxDepth(root.left);
+            int rightDepth = maxDepth(root.right);
+            return Math.max(leftDepth, rightDepth) + 1;
+        }
+    }
+```
+## 111 二叉树的最小深度 easy
+后序遍历，根节点的最小高度即这个二叉树的最小深度。若左右孩子有为空的，则找左右孩子较大深度+1作为该节点的高度，若左右孩子都非空，则找左右孩子较小深度+1作为该节点的高度
+```
+class Solution {
+    int result = 0;
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int leftDepth = minDepth(root.left);
+        int rightDepth = minDepth(root.right);
+        if (root.left == null || root.right == null) return Math.max(leftDepth, rightDepth) + 1;
+        return Math.min(leftDepth, rightDepth) + 1;
+    }
+}
+```
+## 222 完全二叉树的的节点个数 easy
+后序遍历，找出左右孩子的节点个数再加1，即当前节点所在子树的节点个数
+```
+    class Solution {
+        int result = 0;
+        public int countNodes(TreeNode root) {
+            if (root == null) return 0;
+            int left = countNodes(root.left);
+            int right = countNodes(root.right);
+            return result = left + right + 1;
+        }
+    }
+```
+## 110 平衡二叉树 easy
+后序遍历，在求节点高度的过程中，判断左右节点高度差是否小于2，若不是则直接返回-1即不符合平衡二叉树，其判断不符合的依据是高度差大于1、左节点已不符合、右节点已不符合
+```
+    class Solution {
+        public boolean isBalanced(TreeNode root) {
+            return getHeight(root) != -1 ? true : false;
+        }
+        private int getHeight(TreeNode node) {
+            if (node == null) return 0;
+            int leftHeight = getHeight(node.left);
+            int rightHeight = getHeight(node.right);
+            if (leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1) return -1;
+            int height = Math.max(leftHeight, rightHeight) + 1;
+            return height;
+        }
+    }
+```
+## 257 二叉树的所有路径 easy
+前序遍历+回溯
+```
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> result = new ArrayList<>();
+        recurse(root, new ArrayList<String>(), result);
+        return result;
+    }
+    private void recurse(TreeNode node, List<String> path, List<String> result) {
+        path.add(String.valueOf(node.val)); //中序遍历
+        if (node.left == null && node.right == null) result.add(String.join("->", path)); //遇到叶节点
+        if (node.left != null) {
+            recurse(node.left, path, result);
+            path.remove(path.size() - 1); //回溯
+        }
+        if (node.right != null) {
+            recurse(node.right, path, result);
+            path.remove(path.size() - 1); //回溯
+        }
+    }
+```
+## 404 左叶子之和 easy
+后序遍历，当中间节点满足左孩子是左叶节点时，加上左叶节点的值
+```
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root==null) return 0;
+        return sumOfLeftLeaves(root.left) 
+            + sumOfLeftLeaves(root.right) 
+            + (root.left!=null && root.left.left==null && root.left.right==null ? root.left.val : 0);
+    }
+```
+## 513 找树左下角的值 middle
+前中后序遍历都行，因为都是先遍历左节点再遍历右节点。两个全局变量：一个记录最大深度maxDepth，一个记录结果result。终止条件是叶子节点，若此时深度大于最大深度，则更新maxDepth和result
+```java
+    class Solution {
+        private int maxDepth = Integer.MIN_VALUE;
+        private int result = 0;
+    
+        public int findBottomLeftValue(TreeNode root) {
+            recurse(root, 1);
+            return result;
+        }
+    
+        private void recurse(TreeNode node, int depth) {
+            if (node.left == null && node.right == null && depth > maxDepth) {
+                maxDepth = depth;
+                result = node.val;
+            }
+            if (node.left != null) {
+                depth++;
+                recurse(node.left, depth);
+                depth--; //回溯
+            }
+            if (node.right != null) {
+                depth++;
+                recurse(node.right, depth);
+                depth--; //回溯
+            }
+        }
+    }
+```
+## 112 路径总和 easy
+前序遍历，终止条件是叶子节点时的sum等于目标值返回true，注意回溯。原理和257找出所有路径类似
+```java
+    class Solution {
+        private int sum = 0;
+        private boolean flag = false;
+        public boolean hasPathSum(TreeNode root, int targetSum) {
+            if (root == null) return false;
+            return recurse(root, targetSum);
+        }
+        private boolean recurse(TreeNode node, int targetSum) {
+            sum += node.val;
+            if (node.left == null && node.right == null && sum == targetSum) flag = true;
+            if (node.left != null) {
+                hasPathSum(node.left, targetSum);
+                sum -= node.left.val;
+            }
+            if (node.right != null) {
+                hasPathSum(node.right, targetSum);
+                sum -= node.right.val;
+            }
+            return flag;
+        }
+    }
+```
+## 106 从中序与后序遍历序列构造二叉树 middle
+先从后序最后一个节点确定根节点，再从中序切割出左右，再从后序切割出中，注意区间统一是左闭右开，迭代确定二叉树
+
+第一步：如果数组大小为零的话，说明是空节点了。
+
+第二步：如果不为空，那么取后序数组最后一个元素作为节点元素。
+
+第三步：找到后序数组最后一个元素在中序数组的位置，作为切割点
+
+第四步：切割中序数组，切成中序左数组和中序右数组 （顺序别搞反了，一定是先切中序数组）
+
+第五步：切割后序数组，切成后序左数组和后序右数组
+
+第六步：递归处理左区间和右区间
+```java
+    class Solution {
+        Map<Integer, Integer> map = new HashMap<>();  // 方便根据数值查找位置
+        public TreeNode buildTree(int[] inorder, int[] postorder) {
+            for (int i = 0; i < inorder.length; i++) { // 用map保存中序序列的数值对应位置
+                map.put(inorder[i], i);
+            }
+            return findNode(inorder, 0, inorder.length, postorder, 0, postorder.length);  // 前闭后开
+        }
+    
+        public TreeNode findNode(int[] inorder, int inBegin, int inEnd, int[] postorder, int postBegin, int postEnd) {
+            // 参数里的范围都是前闭后开
+            if (inBegin >= inEnd || postBegin >= postEnd) {  // 不满足左闭右开，说明没有元素，返回空树
+                return null;
+            }
+            int rootIndex = map.get(postorder[postEnd - 1]);  // 找到后序遍历的最后一个元素在中序遍历中的位置
+            TreeNode root = new TreeNode(inorder[rootIndex]);  // 构造结点
+            int lenOfLeft = rootIndex - inBegin;  // 保存中序左子树个数，用来确定后序数列的个数
+            root.left = findNode(inorder, inBegin, rootIndex,
+                                postorder, postBegin, postBegin + lenOfLeft); //用左中序、左后序构造左子树
+            root.right = findNode(inorder, rootIndex + 1, inEnd,
+                                postorder, postBegin + lenOfLeft, postEnd - 1); //用右中序、右后序构造右子树
+            return root;
+        }
+    }
+```
 
 # 模拟
 ## 2899 上一个遍历的整数 easy
