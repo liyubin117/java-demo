@@ -28,5 +28,7 @@ public class StringDemo {
         String str = "a b  cc d ";
         System.out.println(Arrays.toString(str.split(" ")));
         System.out.println(Arrays.toString(str.split("( )+")));
+        System.out.println(Arrays.toString("A10W20S30D40".split("[ASWD]")));
+
     }
 }

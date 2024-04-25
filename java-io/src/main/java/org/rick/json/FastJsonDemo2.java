@@ -17,10 +17,7 @@ import java.util.Map;
 public class FastJsonDemo2 {
     @Test
     public void testNull() {
-        JSONObject obj = new JSONObject();
-        obj.put("k", "v");
-        obj.put("k2", null);
-        System.out.println(obj.toJSONString());
+        System.out.println(JSONObject.parseObject("{'a':1}"));
     }
 
     public static void main(String[] args) {

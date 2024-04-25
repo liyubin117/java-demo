@@ -1,4 +1,4 @@
-package org.rick.coder;
+package org.rick.coder.test;
 
 import org.junit.Test;
 import org.rick.structure.TreeNode;
@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-public class BinaryTreeCoder {
+public class BinaryTreeTest {
 
     @Test
     public void testBinaryTreePaths() {

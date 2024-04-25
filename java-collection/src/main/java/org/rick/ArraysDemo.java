@@ -23,9 +23,11 @@ public class ArraysDemo {
 		 * 基本类型排序
 		 */
 		//全部排序
-		int[] iArr = {4, 9, 3, 6, 10};
+		Integer[] iArr = {4, 9, 3, 6, 10};
 		Arrays.sort(iArr);
 		System.out.println("基本类型全部排序:"+Arrays.toString(iArr));
+		Arrays.sort(iArr, (p1, p2) -> p2 - p1);
+		System.out.println("基本类型全部倒序排序:"+Arrays.toString(iArr));
 		//区间排序，包括fromIndex位置的元素，不包括toIndex位置的元素
 		int[]iArr2 = {4, 9, 3, 6, 10};
 		Arrays.sort(iArr2,0,3);
