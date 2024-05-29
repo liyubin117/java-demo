@@ -2,6 +2,8 @@ package org.rick.coder.test;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class DpTest {
@@ -64,6 +66,28 @@ public class DpTest {
                 }
             }
             System.out.println(dp[M-1][N]);
+        }
+    }
+
+    @Test
+    public void test139() {
+        new Solution139().wordBreak("leetcode", Arrays.asList("leet", "code"));
+    }
+
+    class Solution139 {
+        public boolean wordBreak(String s, List<String> wordDict) {
+            boolean[] dp = new boolean[s.length() + 1];
+            dp[0] = true;
+            for (int j = 1; j <= s.length(); j++) {
+                for (int i = 0; i < j; i++) {
+//                    String str = s.substring(i, j);
+//                    dp[j] = dp[i] && wordDict.contains(str);
+                    if (dp[i] && wordDict.contains(s.substring(i, j))) {
+                        dp[j] = true;
+                    }
+                }
+            }
+            return dp[s.length()];
         }
     }
 }
