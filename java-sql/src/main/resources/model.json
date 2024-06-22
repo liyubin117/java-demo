@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "defaultSchema": "TEST",
+  "schemas": [{
+    "name": "TEST",
+    "type": "custom",
+    "factory": "com.sql.calcite.CustomSchemaFactory",
+    "operand": {}
+  }
+  ]
+}

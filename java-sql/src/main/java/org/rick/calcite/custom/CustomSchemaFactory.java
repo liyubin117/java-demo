@@ -1,4 +1,4 @@
-package org.rick.calcite;
+package org.rick.calcite.custom;
 
 import org.apache.calcite.schema.Schema;
 import org.apache.calcite.schema.SchemaFactory;

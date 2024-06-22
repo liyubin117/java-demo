@@ -1,4 +1,4 @@
-package org.rick.calcite;
+package org.rick.calcite.custom;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,7 +29,7 @@ public class Client {
              * factory 请求接收类，该类会实例化Schema也就是数据库类，Schema会实例化Table实现类，Table会实例化数据类。
              * operand 动态参数，ScheamFactory的create方法会接收到这里的数据
              * */
-            String model = "{\"version\":\"1.0\",\"defaultSchema\":\"TEST\",\"schemas\":[{\"name\":\"TEST\",\"type\":\"custom\",\"factory\":\"com.sql.calcite.CustomSchemaFactory\",\"operand\":{}}]}";
+            String model = "{\"version\":\"1.0\",\"defaultSchema\":\"TEST\",\"schemas\":[{\"name\":\"TEST\",\"type\":\"custom\",\"factory\":\"org.rick.calcite.custom.CustomSchemaFactory\",\"operand\":{}}]}";
             Connection connection = DriverManager.getConnection("jdbc:calcite:model=inline:" + model);
 
             Statement statement = connection.createStatement();
